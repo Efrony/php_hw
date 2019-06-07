@@ -12,18 +12,10 @@
     $title = "HOME PAGE";
     $h1 = '<h1>MY FIRST PHP-CODE</h1>';
     $dateToday = getDate();
+    include ("main.php")
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title> <?=$title?> </title> 
-</head>
-<body>
-     <?=$h1?><br> <?=$dateToday['year']?>
 
-</body>    
-</html>
 
 <?php 
 // 5. *Используя только две переменные, поменяйте их значение местами. 
