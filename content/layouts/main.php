@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="style/header_style.css">
     <link rel="stylesheet" href="style/index.css">
     <link rel="stylesheet" href="style/footer_style.css">
-    <title>Home</title>
+    <title><?=$title?></title>
 </head>
 
 <body>
@@ -37,9 +37,9 @@
     </header>
     <nav>
         <ul>
-            <li><a href="#">HOME</a></li>
-            <li><a href="man.html">MAN</a></li>
-            <li><a href="women.html">WOMEN</a></li>
+            <li><a href="/">HOME</a></li>
+            <li><a href="/?page=man">MAN</a></li>
+            <li><a href="/?page=women">WOMEN</a></li>
             <li><a href="#">KIDS</a></li>
             <li><a href="#">ACCOSERIESE</a></li>
             <li><a href="#">HOT DEALS</a></li>
