@@ -8,20 +8,17 @@ if (isset($_GET['page'])) {
 switch ($page) {
     case 'home':
         $paramsContent = [
-            'title' => 'Home page',
-            'content' => renderContent('home')
+            'title' => 'Home page'
         ];
         break;
     case 'man':
         $paramsContent = [
-            'title' => 'Man',
-            'content' => renderContent('man')
+            'title' => 'Man'
         ];
         break;
     case 'women':
         $paramsContent = [
-            'title' => 'Women',
-            'content' => renderContent('women')
+            'title' => 'Women'
         ];
         break;
 
@@ -40,9 +37,9 @@ function renderContent($page, array $paramsContent = []){
         foreach ($paramsContent as $key => $value) $$key = $value; // аналог extract() 
     }
 
-    $fileName = "./content/{$page}.php";
+    $fileName = "./templates/{$page}.php";
     if (file_exists($fileName)) {
-        include $fileName;
+        include_once $fileName;
     } else {
         Die("Страницы {$fileName} не существует.");
     }
