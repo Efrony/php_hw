@@ -86,18 +86,21 @@ echo "<br><br>ЗАДАНИЕ 6 <br>";
 $mounths = [
     'Январь' => ['Неделя 1', 'Неделя 2', 'Неделя 3','Неделя 4'], 
     'Февраль' => ['Неделя 5', 'Неделя 6', 'Неделя 7','Неделя 8', 'Неделя 9' => ['День 25', 'День 26', 'День 27', 'День 28']],
-    'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь']; //
+    'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь']; 
 
-function renderList($list) {
+function renderList($list, $linkStory = '') {
     $render = '<ul style="margin-left: 20px">';
     foreach ($list as $head => $string) {
         if (is_array($string)) {
-            $render .= "<li><a href=''>{$head}</a></li>";
-            $render .= renderList($string);
+            $link = $linkStory . "/" . transliteration_($head);
+            $render .= '<li><a href=' . $link . '>' . $head . '</a></li>';
+            $render .= renderList($string, $link);
         } else {
-            $render .= "<li><a href=''>{$string}</a></li>";
+            $link = $linkStory . "/" . transliteration_($string);
+            $render .= '<li><a href=' . $link . '>' . $string . '</a></li>';
         }
     }
+
     $render .= '</ul>'; 
     return $render;
 }
@@ -134,7 +137,7 @@ foreach ($provinces as $province => $cities) {
 //-------------------------------- ЗАДАНИЕ 9
 
 echo "<br><br>ЗАДАНИЕ 9 <br>";
-function transliteration_9($str)
+function transliteration_($str)
 {   
     $strTrans = '';
     $abc = [
@@ -161,4 +164,4 @@ function transliteration_9($str)
     }
     return str_replace(' ', '_',$strTrans);
 }
-echo transliteration_9('Хэй хэй! Как твои дела? - Отлично! А как твои?? 100 лет не виделись...');
+echo transliteration_('Хэй хэй! Как твои дела? - Отлично! А как твои?? 100 лет не виделись...');
