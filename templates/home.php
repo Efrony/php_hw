@@ -138,15 +138,13 @@ function cityList($provinces) {
     	foreach ($cities as $city) {
         	if (mb_substr($city, 0, 1) == 'К') {
 				$list .= "$city, ";	
-        	}
-    	}
-		
-		$list = substr_replace($list, '.', -2);
+        		}
+    		}	
+	$list = substr_replace($list, '.', -2);
 	}
-	echo $list; 
 }
 
-cityList($provinces);
+echo cityList($provinces);
 
 //-------------------------------- ЗАДАНИЕ 9
 
