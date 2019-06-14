@@ -123,16 +123,30 @@ for ($i = 0; $i < 10; print($i++)) { }
 //-------------------------------- ЗАДАНИЕ 8
 echo "<br><br>ЗАДАНИЕ 8 <br>";
 
-foreach ($provinces as $province => $cities) {
-    echo "$province:<br>";
-    foreach ($cities as $city) {
-        if (mb_substr($city, 0, 1) == 'К') {
-            if ($cities[count($cities) - 1] == $city) echo "$city.";
-            else echo "$city, ";
-        }
-    }
-    echo "<br>";
+<?php
+$provinces = [
+    'Московская область' => ['Москва', 'Клин', 'Зеленоград', 'Козинск'],
+    'Ленинградская область' => ['Санкт-Петербург', 'Всеволожск', 'Павловск', 'Кронштадт']
+];
+
+echo "<br><br>ЗАДАНИЕ 8 <br>";
+
+function cityList($provinces) {
+	$list ='';
+	foreach ($provinces as $province => $cities) {
+		$list .= "<br>{$province}:<br>";
+    	foreach ($cities as $city) {
+        	if (mb_substr($city, 0, 1) == 'К') {
+				$list .= "$city, ";	
+        	}
+    	}
+		
+		$list = substr_replace($list, '.', -2);
+	}
+	echo $list; 
 }
+
+cityList($provinces);
 
 //-------------------------------- ЗАДАНИЕ 9
 
