@@ -20,18 +20,22 @@ do {
 //-------------------------------- ЗАДАНИЕ 3
 echo "<br><br>ЗАДАНИЕ 3 <br>";
 $provinces = [
-    'Московская область' => ['Москва', 'Зеленоград', 'Клин'],
+    'Московская область' => ['Москва', 'Клин', 'Зеленоград', 'Козинск'],
     'Ленинградская область' => ['Санкт-Петербург', 'Всеволожск', 'Павловск', 'Кронштадт']
 ];
-
-foreach ($provinces as $province => $cities) {
-    echo "{$province}:<br>";
-    foreach ($cities as $city) {
-        if ($cities[count($cities) - 1] == $city) echo "{$city}.";
-        else echo "{$city}, ";
-    }
-    echo "<br>";
+echo "<br><br>ЗАДАНИЕ 8 <br>";
+function cityListAll($provinces) {
+	$list ='';
+	foreach ($provinces as $province => $cities) {
+		$list .= "<br>{$province}:<br>";
+    	foreach ($cities as $city) {
+				$list .= "$city, ";	
+    		}	
+	$list = substr_replace($list, '.', -2);
+	}
+	return $list;
 }
+echo cityListAll($provinces);
 
 //-------------------------- ЗАДАНИЕ 4
 echo "<br><br>ЗАДАНИЕ 4 <br>";
