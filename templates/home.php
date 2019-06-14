@@ -142,6 +142,7 @@ function cityList($provinces) {
     		}	
 	$list = substr_replace($list, '.', -2);
 	}
+	return $list;
 }
 
 echo cityList($provinces);
