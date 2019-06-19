@@ -7,51 +7,6 @@ body {
   padding: 0;
   box-sizing: border-box;
 }
-.nav {
-  height: 56px;
-  border: 1px solid #ececec;
-  background-color: #ffffff;
-}
-@media (max-width: 590px) {
-  .nav {
-    height: auto;
-  }
-}
-.nav ul {
-  margin: 0 auto;
-  width: 680px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  list-style-type: none;
-}
-@media (max-width: 700px) {
-  .nav ul {
-    width: auto;
-    padding: 0 10px;
-  }
-}
-@media (max-width: 590px) {
-  .nav ul {
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-}
-.nav ul li {
-  height: 56px;
-}
-.nav ul li a {
-  text-decoration: none;
-  color: #222222;
-  font-size: 14px;
-  font-weight: 700;
-  display: block;
-  padding: 17px 10px;
-}
-.nav ul a:hover,
-.nav ul li:nth-child(3) a {
-  border-bottom: 3px solid #ef5b70;
-}
 .newArrivalsBlock {
   background-color: #f8f3f4;
 }
@@ -80,6 +35,8 @@ body {
   text-transform: uppercase;
   color: #636363;
   font-weight: 300;
+  border: none;
+  background-color: #f8f3f4;
 }
 .newArrivals nav span {
   font-weight: 700;
@@ -114,8 +71,11 @@ main .content .contentBcg aside {
   background: #fff;
   border: 1px solid #eaeaea;
 }
+main .content .contentBcg img[alt="fotoProduct"] {
+  max-height: 724px;
+}
 @media (max-width: 1142px) {
-  main .content .contentBcg img[alt="fotoGirl"] {
+  main .content .contentBcg img[alt="fotoProduct"] {
     width: 100%;
   }
 }
@@ -235,11 +195,12 @@ aside form input[type="submit"]:before {
   display: flex;
   flex-flow: wrap;
   justify-content: space-between;
+  margin-top: 50px;
 }
 .product a {
   text-decoration: none;
   margin-bottom: 39px;
-  cursor: default;
+  width: 23%;
 }
 .product a:hover {
   box-shadow: 0 5px 8px rgba(0, 0, 0, 0.16);
@@ -247,6 +208,12 @@ aside form input[type="submit"]:before {
 .product figure {
   position: relative;
   overflow: hidden;
+  width: 100%;
+  text-align: center;
+}
+.product figure img {
+  height: 280px;
+  margin: 0 auto;
 }
 .product figcaption {
   color: #222222;
@@ -267,7 +234,7 @@ aside form input[type="submit"]:before {
 .product .shadowHover {
   position: absolute;
   top: 0;
-  background-image: url(../img/product/Background.png);
+  background-image: url(../img/Background.png);
   background-repeat: no-repeat;
   height: 100%;
   width: 100%;
@@ -284,7 +251,7 @@ aside form input[type="submit"]:before {
   display: flex;
   align-items: stretch;
   margin-top: 98px;
-  padding: 10px 10px 3px;
+  padding: 10px 10px 10px 10px;
   background: rgba(0, 0, 0, 0.25);
   cursor: pointer;
 }

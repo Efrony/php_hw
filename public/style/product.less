@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,900');
+
 body {
     font-family: Lato, sans-serif;
 }
@@ -8,47 +9,6 @@ body {
     padding: 0;
     box-sizing: border-box;
 }
-
-.nav {
-    height: 56px;
-    border: 1px solid #ececec;
-    background-color: #ffffff;
-    @media (max-width: 590px) {
-        height: auto;
-    }
-    ul {
-        margin: 0 auto;
-        width: 680px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        list-style-type: none;
-        @media (max-width: 700px) {
-            width: auto;
-            padding: 0 10px;
-        }
-        @media (max-width: 590px) {
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-        li {
-            height: 56px;
-            a {
-                text-decoration: none;
-                color: #222222;
-                font-size: 14px;
-                font-weight: 700;
-                display: block;
-                padding: 17px 10px;
-            }
-        }
-        a:hover,
-        li:nth-child(3) a {
-            border-bottom: 3px solid #ef5b70;
-        }
-    }
-}
-
 .newArrivalsBlock {
     background-color: #f8f3f4;
 }
@@ -75,6 +35,8 @@ body {
         text-transform: uppercase;
         color: #636363;
         font-weight: 300;
+        border:  none;
+        background-color: #f8f3f4; 
         span {
             font-weight: 700;
             color: #f16d7f;
@@ -108,7 +70,8 @@ main {
                 background: #fff;
                 border: 1px solid #eaeaea;
             }
-            img[alt="fotoGirl"] {
+            img[alt="fotoProduct"] {
+                max-height: 724px;
                 @media (max-width: 1142px) {
                     width: 100%;
                 }
@@ -234,10 +197,12 @@ aside {
     display: flex;
     flex-flow: wrap;
     justify-content: space-between;
+    margin-top: 50px;
     a {
         text-decoration: none;
         margin-bottom: 39px;
-        cursor: default;
+        width: 23%;
+        //cursor: default;  
     }
     a:hover {
         box-shadow: 0 5px 8px rgba(0, 0, 0, 0.16);
@@ -245,6 +210,12 @@ aside {
     figure {
         position: relative;
         overflow: hidden;
+        width: 100%;
+        text-align: center;
+        img {
+            height: 280px;
+            margin: 0 auto;
+        }
     }
     figcaption {
         color: #222222;
@@ -265,14 +236,13 @@ aside {
     .shadowHover {
         position: absolute;
         top: 0;
-        background-image: url(../img/product/Background.png);
+        background-image: url(../img/Background.png);
         background-repeat: no-repeat;
         height: 100%;
         width: 100%;
         display: none;
         justify-content: center;
         overflow: hidden;
-        
         .addToCart {
             border: 1px solid #fff;
             position: absolute;
@@ -282,7 +252,7 @@ aside {
             display: flex;
             align-items: stretch;
             margin-top: 98px;
-            padding: 10px 10px 3px;
+            padding: 10px 10px 10px 10px;
             background: rgba(0, 0, 0, 0.25);
             cursor: pointer;
         }
