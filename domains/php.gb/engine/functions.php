@@ -8,6 +8,7 @@ function getParamsTemplate($page)
                 'title' => 'Home page',
                 'productList' => getProductList(),
                 'messageLoad' => imageLoad(DIR_CATALOG),
+
             ];
             break;
         case 'man':
@@ -20,7 +21,7 @@ function getParamsTemplate($page)
                 'title' => 'Product',
                 'ratingUP' => ratingUp($_GET['id']),
                 'productList' => getProductList(),
-                'productItem' => getProductList('id =' . $_GET['id'])[0]
+                'productItem' => getProductList('id =' . (int)$_GET['id'])[0]
             ];
             break;
     }
@@ -41,7 +42,7 @@ function getProductList($where = '')
 function ratingUp($id) {
     $id = (int)$id;
     $sql = "UPDATE `product` SET `rating` =  `rating` + 1 WHERE (`id` = '$id');";
-    @mysqli_query(connectDB(), $sql);
+    executeQuery($sql);
 }
 
 
@@ -78,15 +79,20 @@ function imageLoad($dirCatalog)
 {
     if (isset($_POST['loadbutton'])) {
         if ($_FILES['loadfile']['type'] == 'image/jpeg'  && $_FILES['loadfile']['size'] <= 2000000) {
-            $path = $dirCatalog . $_FILES['loadfile']['name'];
+            $name = $_FILES['loadfile']['name'];
+            $path = $dirCatalog . $name;
             if (move_uploaded_file($_FILES['loadfile']['tmp_name'], $path)) {
-                $message = "<br>Файл загружен<br>";
+                $message = "Файл загружен. Перезагрузите страницу";
+                executeQuery("INSERT INTO `product` (`name`, `rating`) VALUES ('{$name}', '0');");
             } else {
-                $message = "<br>Ошибка загрузки<br>";
+                $message = "Ошибка загрузки";
             }
         } else {
-            $message = "<br>Файл не соответсвует требованиям<br>";
+            $message = "Файл не соответсвует требованиям";
         }
     }
+    //header("Location: index.php/?messageLoad={$message}");
+    //exit();
     return $message;
 }
+

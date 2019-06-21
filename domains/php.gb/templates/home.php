@@ -1,7 +1,7 @@
 
 
 <head>
-    <link rel="stylesheet" href="style/index.css">
+    
 </head>
 <main>
 home page
@@ -23,7 +23,7 @@ home page
         <?php endforeach; ?>
     </div>
     <form method="post" enctype="multipart/form-data">
-        <p><?= $messageLoad; ?> Загрузите файл. Он должен быть в формате JPG и не более 2мб</p>
+        <p><?= $messageLoad; ?><br> Загрузите файл. Он должен быть в формате JPG и не более 2мб</p>
         <input type="file" name="loadfile">
         <input type="submit" name="loadbutton" value="Загрузить">
     </form>

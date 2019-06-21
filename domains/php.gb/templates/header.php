@@ -12,7 +12,7 @@
     </div>
     <div class="my">
         <a class="cartButton" href="cart.html">
-            <img src="img/Forma_1.png" alt="basket">
+            <img src="/img/Forma_1.png" alt="basket">
             <div class="cartCount" >1</div>
         </a>
         <a href="my_account.html" class="myAccount">

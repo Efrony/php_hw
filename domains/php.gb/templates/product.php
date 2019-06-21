@@ -8,7 +8,7 @@
 <main>
     <div class="bcgBlock"></div>
     <div class="content">
-        <div class="contentBcg"><img src="<?= DIR_CATALOG .  $productItem['name'] ?>" alt="fotoProduct">
+        <div class="contentBcg"><img src="/<?= DIR_CATALOG .  $productItem['name'] ?>" alt="fotoProduct">
         <i class="fa fa-eye" aria-hidden="true"></i><span class="raring"> <?=$productItem['rating']?></span>
             <aside>
                 <p class="collection">WOMEN COLLECTION</p> <img src="img/hot_deals/line-border-pink.png" alt="">
@@ -59,7 +59,7 @@
             <?php foreach ($productList as $itemProduct) : ?>
                 <a href="/product/?id=<?= $itemProduct['id'] ?>">
                     <figure class="productItem">
-                        <img src="<?= (DIR_CATALOG . $itemProduct['name']); ?>" alt="productFoto">
+                        <img src="/<?= (DIR_CATALOG . $itemProduct['name']); ?>" alt="productFoto">
                         <div class="shadowHover">
                             <button class="addToCart">&ensp;Add to Cart</button>
                         </div>
