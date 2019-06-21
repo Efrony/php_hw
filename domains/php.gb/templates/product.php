@@ -1,6 +1,4 @@
-<head>
-    <link rel="stylesheet" href="style/product.css">
-</head>
+
 <div class="newArrivalsBlock">
     <div class="newArrivals">
         <p>New Arrivals</p>
@@ -59,7 +57,7 @@
         <div class="likeAlso">you may like also</div>
         <div class="product" id="product">
             <?php foreach ($productList as $itemProduct) : ?>
-                <a href="/?page=product&id=<?= $itemProduct['id'] ?>">
+                <a href="/product/?id=<?= $itemProduct['id'] ?>">
                     <figure class="productItem">
                         <img src="<?= (DIR_CATALOG . $itemProduct['name']); ?>" alt="productFoto">
                         <div class="shadowHover">
