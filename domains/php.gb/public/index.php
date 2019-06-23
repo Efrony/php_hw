@@ -11,9 +11,10 @@ if ($url_array[1] == '') {
 // generateDB(DIR_CATALOG); 
 
 $paramsTemplate = getParamsTemplate($page);
-if (isset($_POST['sendComment'])) {
-    postComment();
-    messageComment();
+
+
+if (isset($_GET['action'])) {
+    doFeedbackAction();
 }
 
 echo renderLayout($page, $paramsTemplate);

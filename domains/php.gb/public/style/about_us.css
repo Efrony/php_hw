@@ -117,7 +117,8 @@ main .content .contentBcg aside {
   display: flex;
   justify-content: space-around;
 }
-.comments .comment button {
+.comments .comment button,
+.comments .comment a {
   padding: 0px 20px;
   text-decoration: none !important;
   display: block;
@@ -126,12 +127,14 @@ main .content .contentBcg aside {
   font-weight: bold;
   border-radius: 3px;
   border: 1px solid #ef5b70;
-  width: 150px;
-  height: 20px;
+  padding: 5px 25px;
+  margin-right: 10px;
   line-height: 20px;
+  font-style: normal;
   cursor: pointer;
 }
-.comments .comment button:hover {
+.comments .comment button:hover,
+.comments .comment a:hover {
   background-color: #ef5b70;
   color: #fff;
 }

@@ -35,28 +35,27 @@
                         <p><?= $comment['date'] ?></p>
                     </address>
                     <div class="buttons">
-                        <button>Редактировать</button>
-                        <button>Удалить</button>
+                        <a href="?action=edit&message=edit&id=<?=$comment['id']?>">Редактировать</a>
+                        <a href="?action=delete&id=<?=$comment['id']?>">Удалить</a>
                     </div>
                 </article>
             </div>
         <? endforeach; ?>
     </section>
     <section>
-        <form action="index.php" method="post" class="data-1">
+        <form action="?action=<?=$_GET['action']?>" method="post" class="data-1">
             <h5>write a comment</h5>
             <p class="point inp">NAME <span class="red">*</span></p>
-            <input type="text" name="nameComment" required>
-            <p class="point inp">EMAIL ADDRESS <span class="red">*</span></p>
-            <input type="email" name="emailComment" required>
+            <input type="text" name="nameComment" required value="<?=$selectedComment['name']?>">
+            <p class="point inp">EMAIL ADDRESS <span class="red" >*</span></p>
+            <input type="email" name="emailComment" required value="<?=$selectedComment['email']?>">
             <p class="point inp">COMMENT<span class="red">*</span></p>
-            <textarea class="areaComment" name="textComment" id="" cols="30" rows="10" required></textarea>
+            <textarea class="areaComment" name="textComment" id="" cols="30" rows="10" required><?=$selectedComment['text']?></textarea>
             <p><span class="red">* Required Fileds</span></p>
             <input type="submit" name="sendComment" value="SEND COMMENT">
+            <input hidden type="text" name="id" value="<?=$selectedComment['id']?>">
         </form>
     </section>
-    <div class="buttons"></div>
 
-    </div>
     </div>
 </main>

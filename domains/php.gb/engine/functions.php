@@ -27,42 +27,26 @@ function getParamsTemplate($page)
             $paramsTemplate = [
                 'title' => 'ABOUT US',
                 'commentsList' => getListDB('comments'),
-                'messageComment' => messageComment()
+                'messageComment' => messageComment(),
+                'selectedComment' => editComment(),
             ];
             break;
     }
     return $paramsTemplate;
 }
 
-function postComment(){
-    $nameComment = mysqli_real_escape_string(getDB(), (string)htmlspecialchars(strip_tags($_POST['nameComment'])));
-    $emailComment = mysqli_real_escape_string(getDB(), (string)htmlspecialchars(strip_tags($_POST['emailComment'])));
-    $textComment = mysqli_real_escape_string(getDB(), (string)htmlspecialchars(strip_tags($_POST['textComment'])));
-    $dateComment = date('Y') . '-' . date('m') . '-' .  date('d') . ' ' . date('H') . ':' . date('i') . ':' . date('d');
-    $sql = "INSERT INTO `comments` (`text`, `name`, `date`, `email`) VALUES ('{$textComment}', '{$nameComment}', '{$dateComment}', '{$emailComment}');";
-    executeQuery($sql);
-    header("Location: ?message=OK");
-}
-
-function messageComment(){
-    if (isset($_GET['message'])) {
-        $messageComment = 'Ваш отзыв добавлен!';
-    } else {
-        $messageComment ='';
-    }
-    return $messageComment;
-}
 
 
 function getListDB($table, $addition = '')
 {
-    
+
     $sql = "SELECT * FROM `{$table}` {$addition};";
     $list = getArrayDB($sql);
     return $list;
 }
 
-function ratingUp($id) {
+function ratingUp($id)
+{
     $id = (int)$id;
     $sql = "UPDATE `product` SET `rating` =  `rating` + 1 WHERE (`id` = '$id');";
     executeQuery($sql);
@@ -89,4 +73,3 @@ function imageLoad($dirCatalog)
     //exit();
     return $message;
 }
-
