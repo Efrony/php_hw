@@ -1,7 +1,5 @@
 <?php
-
-include ('../config/config.php');
-
+include('../config/config.php');
 $url_array = explode("/", $_SERVER['REQUEST_URI']);
 
 if ($url_array[1] == '') {
@@ -9,10 +7,13 @@ if ($url_array[1] == '') {
 } else {
     $page = $url_array[1];
 }
+
 // generateDB(DIR_CATALOG); 
+
 $paramsTemplate = getParamsTemplate($page);
+if (isset($_POST['sendComment'])) {
+    postComment();
+    messageComment();
+}
+
 echo renderLayout($page, $paramsTemplate);
-
-
-
-

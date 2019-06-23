@@ -1,77 +1,71 @@
 <?php
-
 function getParamsTemplate($page)
 {
     switch ($page) {
         case 'home':
             $paramsTemplate = [
-                'title' => 'Home page',
-                'productList' => getProductList(),
-                'messageLoad' => imageLoad(DIR_CATALOG),
-
+                'title' => 'HOME PAGE',
+                'resultCalculate' => resultCalculate(),
             ];
             break;
-        case 'man':
+        case 'women':
             $paramsTemplate = [
-                'title' => 'Man'
+                'title' => 'WOMEN',
+                'productList' => getListDB('product', 'ORDER BY `rating` DESC'),
+                'messageLoad' => imageLoad(DIR_CATALOG),
             ];
             break;
         case 'product':
             $paramsTemplate = [
-                'title' => 'Product',
+                'title' => 'PRODUCT',
                 'ratingUP' => ratingUp($_GET['id']),
-                'productList' => getProductList(),
-                'productItem' => getProductList('id =' . (int)$_GET['id'])[0]
+                'productList' => getListDB('product', 'ORDER BY `rating` DESC'),
+                'productItem' => getListDB('product', 'WHERE id =' . (int)$_GET['id'])[0]
+            ];
+            break;
+        case 'about_us':
+            $paramsTemplate = [
+                'title' => 'ABOUT US',
+                'commentsList' => getListDB('comments'),
+                'messageComment' => messageComment()
             ];
             break;
     }
     return $paramsTemplate;
 }
 
-function getProductList($where = '')
-{
-    if ($where) {
-        $sql = "SELECT * FROM product WHERE {$where} ORDER BY rating DESC;";
+function postComment(){
+    $nameComment = mysqli_real_escape_string(getDB(), (string)htmlspecialchars(strip_tags($_POST['nameComment'])));
+    $emailComment = mysqli_real_escape_string(getDB(), (string)htmlspecialchars(strip_tags($_POST['emailComment'])));
+    $textComment = mysqli_real_escape_string(getDB(), (string)htmlspecialchars(strip_tags($_POST['textComment'])));
+    $dateComment = date('Y') . '-' . date('m') . '-' .  date('d') . ' ' . date('H') . ':' . date('i') . ':' . date('d');
+    $sql = "INSERT INTO `comments` (`text`, `name`, `date`, `email`) VALUES ('{$textComment}', '{$nameComment}', '{$dateComment}', '{$emailComment}');";
+    executeQuery($sql);
+    header("Location: ?message=OK");
+}
+
+function messageComment(){
+    if (isset($_GET['message'])) {
+        $messageComment = 'Ваш отзыв добавлен!';
     } else {
-        $sql = "SELECT * FROM product ORDER BY rating DESC;";
-    }   
-    $productList = getArrayDB($sql);
-    return $productList;
+        $messageComment ='';
+    }
+    return $messageComment;
+}
+
+
+function getListDB($table, $addition = '')
+{
+    
+    $sql = "SELECT * FROM `{$table}` {$addition};";
+    $list = getArrayDB($sql);
+    return $list;
 }
 
 function ratingUp($id) {
     $id = (int)$id;
     $sql = "UPDATE `product` SET `rating` =  `rating` + 1 WHERE (`id` = '$id');";
     executeQuery($sql);
-}
-
-
-function renderLayout($page, array $paramsContent = [])
-{
-    $layout = renderTemplates(LAYOUTS_DIR . 'main', [
-        'content' => renderTemplates($page, $paramsContent),
-        'header' => renderTemplates('header'),
-        'menu' => renderTemplates('menu'),
-        'footer' => renderTemplates('footer'),
-
-    ]);
-    return $layout;
-}
-
-function renderTemplates($page, array $paramsContent = [])
-{
-    ob_start();
-    if (!is_null($paramsContent)) { // если массив не пустой, то переформировать его, создавая переменные с именем ключа 
-        foreach ($paramsContent as $key => $value) $$key = $value; // аналог extract() 
-    }
-
-    $fileName = TEMPLATES_DIR . "{$page}.php";
-    if (file_exists($fileName)) {
-        include_once $fileName;
-    } else {
-        die("Страницы {$fileName} не существует.");
-    }
-    return ob_get_clean();
 }
 
 

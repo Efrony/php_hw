@@ -72,7 +72,7 @@
     </div>
     <div class="copySocialBlock">
         <div class="copySocial">
-            <div class="copy">&copy; 2017 Brand All Rights Reserved.</div>
+            <div class="copy">&copy; <?=date('Y')?> Brand All Rights Reserved.</div>
             <div class="social">
                 <div><i class="fab fa-facebook-f"></i></div>
                 <div><i class="fab fa-twitter"></i></div>

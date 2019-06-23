@@ -34,7 +34,8 @@ body {
 .headerImg .headImgText .fashion {
   color: #f16d7f;
 }
-main {
+main,
+.main {
   margin: 0 auto;
   width: 1142px;
 }
