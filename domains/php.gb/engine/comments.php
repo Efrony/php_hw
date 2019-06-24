@@ -47,7 +47,8 @@ function addComment()
     $emailComment = mysqli_real_escape_string(getDB(), (string)htmlspecialchars(strip_tags($_POST['emailComment'])));
     $textComment = mysqli_real_escape_string(getDB(), (string)htmlspecialchars(strip_tags($_POST['textComment'])));
     $dateComment = date('Y') . '-' . date('m') . '-' .  date('d') . ' ' . date('H') . ':' . date('i') . ':' . date('d');
-    $sql = "INSERT INTO `comments` (`text`, `name`, `date`, `email`) VALUES ('{$textComment}', '{$nameComment}', '{$dateComment}', '{$emailComment}');";
+    $id_product = getIdProduct();
+    $sql = "INSERT INTO `comments` (`id_product`, `text`, `name`, `date`, `email`) VALUES ('{$id_product}','{$textComment}', '{$nameComment}', '{$dateComment}', '{$emailComment}');";
     executeQuery($sql);
     header("Location: ?message=add");
 }
@@ -65,12 +66,12 @@ function editComment()
     $result = executeQuery("SELECT * FROM comments WHERE id = {$id}");
     $selectedComment = mysqli_fetch_assoc($result);
     return $selectedComment;
-    header("Location: /?message=edit&action=edit");
+    header("Location: ?message=edit&action=edit");
 }
 
 function saveComment()
 {   
-    $id = (int)$_POST['id'];
+    $id = (int)$_POST['id_comment'];
     $nameComment = mysqli_real_escape_string(getDB(), (string)htmlspecialchars(strip_tags($_POST['nameComment'])));
     $emailComment = mysqli_real_escape_string(getDB(), (string)htmlspecialchars(strip_tags($_POST['emailComment'])));
     $textComment = mysqli_real_escape_string(getDB(), (string)htmlspecialchars(strip_tags($_POST['textComment'])));

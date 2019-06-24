@@ -13,6 +13,7 @@ function getParamsTemplate($page)
                 'title' => 'WOMEN',
                 'productList' => getListDB('product', 'ORDER BY `rating` DESC'),
                 'messageLoad' => imageLoad(DIR_CATALOG),
+
             ];
             break;
         case 'product':
@@ -20,7 +21,10 @@ function getParamsTemplate($page)
                 'title' => 'PRODUCT',
                 'ratingUP' => ratingUp($_GET['id']),
                 'productList' => getListDB('product', 'ORDER BY `rating` DESC'),
-                'productItem' => getListDB('product', 'WHERE id =' . (int)$_GET['id'])[0]
+                'productItem' => getListDB('product', 'WHERE id =' . getIdProduct())[0],
+                'commentsList' => getListDB('comments', 'WHERE id_product =' . getIdProduct()),
+                'messageComment' => messageComment(),
+                'selectedComment' => editComment(),
             ];
             break;
         case 'about_us':
@@ -35,11 +39,13 @@ function getParamsTemplate($page)
     return $paramsTemplate;
 }
 
-
+function getIdProduct(){
+    $url_product = explode("/", $_SERVER['REQUEST_URI']);
+    return $url_product[2];
+}
 
 function getListDB($table, $addition = '')
 {
-
     $sql = "SELECT * FROM `{$table}` {$addition};";
     $list = getArrayDB($sql);
     return $list;

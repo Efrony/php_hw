@@ -10,7 +10,7 @@
     women
     <div class="product">
         <?php foreach ($productList as $itemProduct) : ?>
-            <a href="/product/?id=<?= $itemProduct['id'] ?>">
+            <a href="/product/<?=$itemProduct['id']?>/?id=<?=$itemProduct['id']?>">
                 <figure class="productItem">
                     <img src="/<?= (DIR_CATALOG . $itemProduct['name']); ?>" alt="productFoto">
                     <div class="shadowHover">
@@ -19,6 +19,7 @@
                     <figcaption><?= $itemProduct['name']; ?>
                         <p>product_price</p>
                         <i class="fa fa-eye" aria-hidden="true"></i><span class="raring"> <?= $itemProduct['rating'] ?></span>
+                        
                     </figcaption>
                 </figure>
             </a>

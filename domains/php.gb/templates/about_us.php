@@ -14,17 +14,13 @@
         text-transform: uppercase;
     }
 </style>
-<div class="newArrivalsBlock">
-    <div class="newArrivals">
-        <p>New Arrivals</p>
-        <nav> Home / Men / <span>New Arrivals</span> </nav>
-    </div>
-</div>
 <main>
     <section class="comments">
         <p class="collection">ABOUT US</p><img src="/img/hot_deals/line-border-pink.png" alt="">
-        <p class="heading">comments</p>
+        <p class="heading">comments about all products</p>
         <p class="messageComment"><?= $messageComment ?></p>
+    </section>
+    <section class="comments">
         <? foreach ($commentsList as $comment) : ?>
             <div>
                 <article class="comment">
@@ -35,27 +31,11 @@
                         <p><?= $comment['date'] ?></p>
                     </address>
                     <div class="buttons">
-                        <a href="?action=edit&message=edit&id=<?=$comment['id']?>">Редактировать</a>
-                        <a href="?action=delete&id=<?=$comment['id']?>">Удалить</a>
+                        <a href="?action=edit&message=edit&id=<?= $comment['id'] ?>">Редактировать</a>
+                        <a href="?action=delete&id=<?= $comment['id'] ?>">Удалить</a>
                     </div>
                 </article>
             </div>
         <? endforeach; ?>
     </section>
-    <section>
-        <form action="?action=<?=$_GET['action']?>" method="post" class="data-1">
-            <h5>write a comment</h5>
-            <p class="point inp">NAME <span class="red">*</span></p>
-            <input type="text" name="nameComment" required value="<?=$selectedComment['name']?>">
-            <p class="point inp">EMAIL ADDRESS <span class="red" >*</span></p>
-            <input type="email" name="emailComment" required value="<?=$selectedComment['email']?>">
-            <p class="point inp">COMMENT<span class="red">*</span></p>
-            <textarea class="areaComment" name="textComment" id="" cols="30" rows="10" required><?=$selectedComment['text']?></textarea>
-            <p><span class="red">* Required Fileds</span></p>
-            <input type="submit" name="sendComment" value="SEND COMMENT">
-            <input hidden type="text" name="id" value="<?=$selectedComment['id']?>">
-        </form>
-    </section>
-
-    </div>
 </main>

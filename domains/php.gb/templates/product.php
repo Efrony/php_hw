@@ -1,3 +1,15 @@
+<style>
+    .messageComment {
+        color: #f16d7f;
+        font-size: 24px;
+        font-weight: 900;
+        text-transform: uppercase;
+    }
+
+    nav ul li:nth-child(1) a {
+        border-bottom: none;
+    }
+</style>
 
 <div class="newArrivalsBlock">
     <div class="newArrivals">
@@ -9,7 +21,8 @@
     <div class="bcgBlock"></div>
     <div class="content">
         <div class="contentBcg"><img src="/<?= DIR_CATALOG .  $productItem['name'] ?>" alt="fotoProduct">
-        <i class="fa fa-eye" aria-hidden="true"></i><span class="raring"> <?=$productItem['rating']?></span>
+            <i class="fa fa-eye" aria-hidden="true"></i><span class="raring"> <?= $productItem['rating'] ?></span>
+            <i class="fas fa-comment"></i><span class="raring"> <?= count($commentsList);?></span>
             <aside>
                 <p class="collection">WOMEN COLLECTION</p> <img src="img/hot_deals/line-border-pink.png" alt="">
                 <p class="heading">Moschino Cheap And Chic</p>
@@ -21,7 +34,7 @@
                 <p class="material"> <span>MATERIAL: </span> COTTON &emsp;&emsp;&emsp; <span>DESIGNER:
                     </span>
                     BINBURHAN </p>
-                <p class="price">$561</p>
+                <p class="price">$561</p> 
                 <form action="#">
                     <div class="characteristic">
                         <div class="color">
@@ -53,7 +66,42 @@
                     <input type="submit" value="&emsp;Add to Cart">
                 </form>
             </aside>
-        </div>
+        </div> 
+        <section class="comments">
+            <p class="collection"></p><img src="/img/hot_deals/line-border-pink.png" alt="">
+            <p class="heading">comments</p>
+            <p class="messageComment"><?= $messageComment ?></p>
+            <? foreach ($commentsList as $comment) : ?>
+                <div>
+                    <article class="comment">
+                        <?= $comment['text'] ?>
+                        <br>
+                        <address>
+                            <?= $comment['name'] ?>
+                            <p><?= $comment['date'] ?></p>
+                        </address>
+                        <div class="buttons">
+                            <a href="?action=edit&message=edit&id=<?= $comment['id'] ?>">Редактировать</a>
+                            <a href="?action=delete&id=<?= $comment['id'] ?>">Удалить</a>
+                        </div>
+                    </article>
+                </div>
+            <? endforeach; ?>
+        </section>
+        <section>
+            <form action="?action=<?= $_GET['action'] ?>" method="post" class="data-1">
+                <h5>write a comment</h5>
+                <p class="point inp">NAME <span class="red">*</span></p>
+                <input type="text" name="nameComment" required value="<?= $selectedComment['name'] ?>">
+                <p class="point inp">EMAIL ADDRESS <span class="red">*</span></p>
+                <input type="email" name="emailComment" required value="<?= $selectedComment['email'] ?>">
+                <p class="point inp">COMMENT<span class="red">*</span></p>
+                <textarea class="areaComment" name="textComment" id="" cols="30" rows="5" required><?= $selectedComment['text'] ?></textarea>
+                <p><span class="red">* Required Fileds</span></p>
+                <input type="submit" name="sendComment" value="SEND COMMENT">
+                <input hidden type="text" name="id_comment" value="<?= $selectedComment['id'] ?>">
+            </form>
+        </section>
         <div class="likeAlso">you may like also</div>
         <div class="product" id="product">
             <?php foreach ($productList as $itemProduct) : ?>
@@ -65,7 +113,7 @@
                         </div>
                         <figcaption><?= $itemProduct['name']; ?>
                             <p>product_price</p>
-                            <i class="fa fa-eye" aria-hidden="true"></i><span class="raring"> <?=$itemProduct['rating']?></span>
+                            <i class="fa fa-eye" aria-hidden="true"></i><span class="raring"> <?= $itemProduct['rating'] ?></span>
                         </figcaption>
                     </figure>
                 </a>
