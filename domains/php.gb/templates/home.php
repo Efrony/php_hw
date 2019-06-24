@@ -63,7 +63,6 @@
             })
             .then(response => response.json())
             .then(res => {
-                console.log(res)
                 document.getElementById('result').value = res['result']
             })
     }

@@ -9,8 +9,6 @@ $operator = $data->operator;
 $result = calculate($firstNumber, $secondNumber, $operator);
 
 $response = [
-    'firstNumber' => $firstNumber,
-    'secondNumber' => $secondNumber ,
     'result' => $result
 ];
 
