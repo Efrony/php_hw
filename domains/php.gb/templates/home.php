@@ -1,18 +1,18 @@
 <style>
-      button,
-      select,
-      input {
-          font-size: 20px;
-          padding: 7px 12px;
-          margin: 10px 15px;
-          width: 150px;
-        } 
+    button,
+    select,
     input {
-          width: 500px;
-        } 
+        font-size: 20px;
+        padding: 7px 12px;
+        margin: 10px 15px;
+        width: 150px;
+    }
 
+    input {
+        width: 500px;
+    }
 </style>
-<main>
+<main class="home_page">
     ЗАДАНИЕ 1
     <form method="post">
         <label>Первое значение:<input type="text" name="firstNumber" value="<?= $_POST['firstNumber'] ?>" required></label><br><br>
@@ -37,33 +37,3 @@
     <button value="/" name="calculateButton"> / </button><br>
     <label>Результат: <input type="text" id="result"></label><br><br>
 </main>
-
-<script>
-    window.onload = function() {
-        $buttons = document.getElementsByName('calculateButton')
-        for (var i = 0; i < $buttons.length; i++) {
-            $buttons[i].addEventListener('click', sendOperator)
-        }
-    }
-
-    function sendOperator(event) {
-        firstNumber = document.getElementById('firstNumber').value
-        secondNumber = document.getElementById('secondNumber').value
-        operator = event.target.value
-        fetch('post.php', {
-                method: 'POST',
-                headers: {
-                    'Content-type': 'application/json'
-                },
-                body: JSON.stringify({
-                    firstNumber: firstNumber,
-                    secondNumber: secondNumber,
-                    operator: operator
-                })
-            })
-            .then(response => response.json())
-            .then(res => {
-                document.getElementById('result').value = res['result']
-            })
-    }
-</script>

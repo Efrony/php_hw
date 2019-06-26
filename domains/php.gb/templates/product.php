@@ -9,37 +9,33 @@
     nav ul li:nth-child(1) a {
         border-bottom: none;
     }
-</style>
 
+</style>
 <div class="newArrivalsBlock">
     <div class="newArrivals">
         <p>New Arrivals</p>
         <nav> Home / Men / <span>New Arrivals</span> </nav>
     </div>
 </div>
-<main>
+<main class="product_page">
     <div class="bcgBlock"></div>
     <div class="content">
-        <div class="contentBcg"><img src="/<?= DIR_CATALOG .  $productItem['name'] ?>" alt="fotoProduct">
-            <i class="fa fa-eye" aria-hidden="true"></i><span class="raring"> <?= $productItem['rating'] ?></span>
-            <i class="fas fa-comment"></i><span class="raring"> <?= count($commentsList);?></span>
+        <div class="contentBcg"><img src="/<?= DIR_CATALOG .  $productItem['id'] . '.jpg' ?>" alt="fotoProduct">
+            <i class="fa fa-eye" aria-hidden="true"></i><span class="raring"> <?=$productItem['rating']?></span>
+            <i class="fas fa-comment"></i><span class="raring"> <?= count($commentsList); ?></span>
             <aside>
                 <p class="collection">WOMEN COLLECTION</p> <img src="img/hot_deals/line-border-pink.png" alt="">
                 <p class="heading">Moschino Cheap And Chic</p>
-                <p class="discr"> Compellingly actualize fully researched processes before proactive
-                    outsourcing.
-                    Progressively syndicate collaborative architectures before cutting-edge services.
-                    Completely
-                    visualize parallel core competencies rather than exceptional portals. </p>
+                <p class="discr"> <?= $productItem['discription'] ?></p>
                 <p class="material"> <span>MATERIAL: </span> COTTON &emsp;&emsp;&emsp; <span>DESIGNER:
                     </span>
                     BINBURHAN </p>
-                <p class="price">$561</p> 
+                <p class="price">$<?= $productItem['price'] ?></p>
                 <form action="#">
                     <div class="characteristic">
                         <div class="color">
                             <p>CHOOSE COLOR</p>
-                            <select required name="colors">
+                            <select name="colors">
                                 <option value="" selected>Red</option>
                                 <option value="black" disabled>Black</option>
                                 <option value="blue">Blue</option>
@@ -49,7 +45,7 @@
                         </div>
                         <div class="size">
                             <p>CHOOSE SIZE</p>
-                            <select required name="sizes">
+                            <select name="sizes">
                                 <option value="">XS</option>
                                 <option value="s" disabled>S</option>
                                 <option value="m">M</option>
@@ -63,10 +59,10 @@
                             <input type="text" value="2" name="quantitys">
                         </div>
                     </div>
-                    <input type="submit" value="&emsp;Add to Cart">
+                    <button type="button" class="addToCart" data-id="<?=$productItem['id']?>">&ensp;Add to Cart</button>
                 </form>
             </aside>
-        </div> 
+        </div>
         <section class="comments">
             <p class="collection"></p><img src="/img/hot_deals/line-border-pink.png" alt="">
             <p class="heading">comments</p>
@@ -107,7 +103,7 @@
             <?php foreach ($productList as $itemProduct) : ?>
                 <a href="/product/?id=<?= $itemProduct['id'] ?>">
                     <figure class="productItem">
-                        <img src="/<?= (DIR_CATALOG . $itemProduct['name']); ?>" alt="productFoto">
+                        <img src="/<?= (DIR_CATALOG . $itemProduct['id']) . '.jpg'; ?>" alt="productFoto">
                         <div class="shadowHover">
                             <button class="addToCart">&ensp;Add to Cart</button>
                         </div>

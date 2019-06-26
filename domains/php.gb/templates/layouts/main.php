@@ -7,10 +7,15 @@
     <link rel="stylesheet" href="/style/header_style.css">
     <link rel="stylesheet" href="/style/nav.css">
     <link rel="stylesheet" href="/style/footer_style.css">
-    <link rel="stylesheet" href="/style/product.css">
     <link rel="stylesheet" href="/style/about_us.css">
     <link rel="stylesheet" href="/style/index.css">
+    <link rel="stylesheet" href="/style/my_account.css">
+    <link rel="stylesheet" href="/style/product.css">
+    <link rel="stylesheet" href="/style/women.css">
+    <link rel="stylesheet" href="/style/cart.css">
+    <script src="/script/script.js"></script>
     <title><?=$title?></title>
+    
 </head>
 
 <body>

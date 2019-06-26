@@ -6,20 +6,19 @@
         border-bottom: 3px solid #ef5b70;
     }
 </style>
-<main>
+<main class="women_page">
     women
     <div class="product">
         <?php foreach ($productList as $itemProduct) : ?>
             <a href="/product/<?=$itemProduct['id']?>/?id=<?=$itemProduct['id']?>">
                 <figure class="productItem">
-                    <img src="/<?= (DIR_CATALOG . $itemProduct['name']); ?>" alt="productFoto">
+                    <img src="/<?= (DIR_CATALOG .  $itemProduct['id']) . '.jpg'; ?>" alt="productFoto">
                     <div class="shadowHover">
-                        <button class="addToCart">&ensp;Add to Cart</button>
+                        <button onclick="return false" class="addToCart" data-id="<?=$itemProduct['id']?>">&ensp;Add to Cart</button>
                     </div>
-                    <figcaption><?= $itemProduct['name']; ?>
-                        <p>product_price</p>
+                    <figcaption><?= $itemProduct['color'] . ' ' . $itemProduct['name'] ; ?>
+                        <p>$<?= $itemProduct['price']; ?></p>
                         <i class="fa fa-eye" aria-hidden="true"></i><span class="raring"> <?= $itemProduct['rating'] ?></span>
-                        
                     </figcaption>
                 </figure>
             </a>

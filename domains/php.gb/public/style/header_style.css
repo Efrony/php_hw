@@ -116,6 +116,9 @@ header .my .cartButton .cartCount {
   top: -10px;
   right: -10px;
 }
+header .my .myAccount {
+  margin-left: 5px;
+}
 header .my .myAccount,
 header .my .myAccountMenu {
   text-decoration: none;

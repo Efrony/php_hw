@@ -1,76 +1,35 @@
-@import url('https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,900');
-body {
-  font-family: Lato, sans-serif;
-}
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-.newArrivalsBlock {
-  background-color: #f8f3f4;
-}
-.newArrivals {
-  width: 1142px;
-  height: 148px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-@media (max-width: 1142px) {
-  .newArrivals {
-    padding: 0 10px;
-    width: auto;
-  }
-}
-.newArrivals p {
-  color: #f16d7f;
-  font-size: 24px;
-  font-weight: 900;
-  text-transform: uppercase;
-}
-.newArrivals nav {
-  font-size: 14px;
-  text-transform: uppercase;
-  color: #636363;
-  font-weight: 300;
-}
-.newArrivals nav span {
-  font-weight: 700;
-  color: #f16d7f;
-}
-/*____________***********____________MAIN______________***********__________*/
-main {
+.about_us_page {
   position: relative;
+  width: 1142px;
+  margin: 0 auto;
 }
-main .bcgBlock {
+.about_us_page .bcgBlock {
   position: absolute;
   height: 777px;
   width: 100%;
   background-color: #f7f7f7;
   z-index: -1;
 }
-main .content {
+.about_us_page .content {
   width: 1142px;
   margin: 0 auto;
 }
 @media (max-width: 1142px) {
-  main .content {
+  .about_us_page .content {
     width: auto;
   }
 }
-main .content .contentBcg {
+.about_us_page .content .contentBcg {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-main .content .contentBcg aside {
+.about_us_page .content .contentBcg aside {
   background: #fff;
   border: 1px solid #eaeaea;
 }
 @media (max-width: 1142px) {
-  main .content .contentBcg img[alt="fotoGirl"] {
+  .about_us_page .content .contentBcg img[alt="fotoGirl"] {
     width: 100%;
   }
 }

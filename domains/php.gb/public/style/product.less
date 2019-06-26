@@ -1,54 +1,6 @@
-@import url('https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,900');
-
-body {
-    font-family: Lato, sans-serif;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-.newArrivalsBlock {
-    background-color: #f8f3f4;
-}
-
-.newArrivals {
-    width: 1142px;
-    height: 148px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    @media (max-width: 1142px) {
-        padding: 0 10px;
-        width: auto;
-    }
-    p {
-        color: #f16d7f;
-        font-size: 24px;
-        font-weight: 900;
-        text-transform: uppercase;
-    }
-    nav {
-        font-size: 14px;
-        text-transform: uppercase;
-        color: #636363;
-        font-weight: 300;
-        border:  none;
-        background-color: #f8f3f4; 
-        span {
-            font-weight: 700;
-            color: #f16d7f;
-        }
-    }
-}
-
-
-/*____________***********____________MAIN______________***********__________*/
-
-main {
+.product_page {
     position: relative;
+    margin: 0 auto;
     .bcgBlock {
         position: absolute;
         height: 777px;
@@ -165,7 +117,7 @@ aside {
                 }
             }
         }
-        input[type="submit"] {
+        .addToCart {
             width: 100%;
             background-color: #fff;
             border: 1px solid #ef5b70;
@@ -176,6 +128,7 @@ aside {
             display: flex;
             justify-content: center;
             align-items: center;
+            cursor: pointer;
             &:before {
                 content: url(../img/hot_deals/cart_1.jpg);
             }

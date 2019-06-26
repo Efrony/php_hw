@@ -7,35 +7,42 @@ body {
   padding: 0;
   box-sizing: border-box;
 }
-.headerImgBlock {
-  background-color: #e8e8e8;
+.newArrivalsBlock {
+  background-color: #f8f3f4;
 }
-.headerImg {
-  height: 665px;
-  background-image: url(../img/Layer_24.jpg);
-  background-repeat: no-repeat;
-  margin: 0 auto;
+.newArrivals {
   width: 1142px;
-  color: #222222;
+  height: 148px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+@media (max-width: 1142px) {
+  .newArrivals {
+    padding: 0 10px;
+    width: auto;
+  }
+}
+.newArrivals p {
+  color: #f16d7f;
+  font-size: 24px;
   font-weight: 900;
-  letter-spacing: 1px;
-  font-size: 40px;
+  text-transform: uppercase;
 }
-.headerImg .headImgText {
-  position: relative;
-  top: 224px;
-  padding-left: 10px;
-  border-left: 12px solid #f16d7f;
+.newArrivals nav {
+  font-size: 14px;
+  text-transform: uppercase;
+  color: #636363;
+  font-weight: 300;
+  background-color: #f8f3f4;
+  border: none;
 }
-.headerImg .headImgText .theBrand {
-  font-size: 60px;
-  letter-spacing: 1.5px;
-}
-.headerImg .headImgText .fashion {
+.newArrivals nav span {
+  font-weight: 700;
   color: #f16d7f;
 }
-main,
-.main {
+.home_page {
   margin: 0 auto;
   width: 1142px;
 }

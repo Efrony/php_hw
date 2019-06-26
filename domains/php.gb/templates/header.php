@@ -11,14 +11,15 @@
         </div>
     </div>
     <div class="my">
-        <a class="cartButton" href="cart.html">
+        <a class="cartButton" href="/cart/">
             <img src="/img/Forma_1.png" alt="basket">
             <div class="cartCount" >1</div>
         </a>
-        <a href="my_account.html" class="myAccount">
+        <a href="/my_account/" class="myAccount">
             My Account
             <i class="fas fa-caret-down"></i>
             <div class="myAccountMenu">Exit</div>
         </a>
+        <a href="/my_account/" class="myAccount">Sign in / Registration</a>
     </div>
 </header>

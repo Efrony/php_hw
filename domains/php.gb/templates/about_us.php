@@ -14,9 +14,10 @@
         text-transform: uppercase;
     }
 </style>
-<main>
+<main class="about_us_page">
     <section class="comments">
-        <p class="collection">ABOUT US</p><img src="/img/hot_deals/line-border-pink.png" alt="">
+        <p class="collection">ABOUT US</p>
+        <img src="/img/hot_deals/line-border-pink.png" alt="">
         <p class="heading">comments about all products</p>
         <p class="messageComment"><?= $messageComment ?></p>
     </section>

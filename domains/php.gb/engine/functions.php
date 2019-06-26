@@ -2,6 +2,7 @@
 function getParamsTemplate($page)
 {
     switch ($page) {
+
         case 'home':
             $paramsTemplate = [
                 'title' => 'HOME PAGE',
@@ -17,6 +18,9 @@ function getParamsTemplate($page)
             ];
             break;
         case 'product':
+            if (isset($_GET['action'])) {
+                doFeedbackAction();
+            }
             $paramsTemplate = [
                 'title' => 'PRODUCT',
                 'ratingUP' => ratingUp($_GET['id']),
@@ -28,6 +32,9 @@ function getParamsTemplate($page)
             ];
             break;
         case 'about_us':
+            if (isset($_GET['action'])) {
+                doFeedbackAction();
+            }
             $paramsTemplate = [
                 'title' => 'ABOUT US',
                 'commentsList' => getListDB('comments'),
@@ -35,11 +42,36 @@ function getParamsTemplate($page)
                 'selectedComment' => editComment(),
             ];
             break;
+        case 'my_account':
+            $paramsTemplate = [
+                'title' => 'MY ACCOUNT',
+            ];
+            break;
+        case 'cart':
+            $paramsTemplate = [
+                'title' => 'CART',
+            ];
+            break;
+        case 'api':
+            if ($_GET['action'] == 'addToCart') {
+                echo('dsadsadsadasdddddddddddddddddddddddddddddddddddd');
+            }
+            if ($_GET['action'] == 'calculate') {
+                $data = json_decode(file_get_contents('php://input'));
+                $result = calculate($data->firstNumber, $data->secondNumber, $data->operator);
+                $response = [
+                    'result' => $result
+                ];
+    
+                header("Content-type: application/json");
+                echo json_encode($response);
+            }
     }
     return $paramsTemplate;
 }
 
-function getIdProduct(){
+function getIdProduct()
+{
     $url_product = explode("/", $_SERVER['REQUEST_URI']);
     return $url_product[2];
 }
