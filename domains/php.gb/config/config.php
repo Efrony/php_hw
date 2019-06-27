@@ -15,6 +15,6 @@ include ('../engine/render.php');
 include ('../engine/db.php');
 include ('../engine/catalog.php');
 include ('../engine/comments.php');
-include ('../engine/cart.php');
 include ('../engine/auth.php');
+include ('../engine/cart.php');
 

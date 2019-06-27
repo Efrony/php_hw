@@ -32,7 +32,7 @@
                             </div>
                             <div class="shipping">FREE</div>
                             <div class="subtotal">$ <?=$cartItem['price'] * $cartItem['quantity']?></div>
-                            <div class="action"> <a href="#"><img class="deleteButton" src="/img/cart/delete.png" alt="del"></a></div>
+                            <div class="action"> <a href="#"><img class="deleteButton" id="deleteButton" data-id="<?=$cartItem['id_cart_item']?>" src="/img/cart/delete.png" alt="del"></a></div>
                         </div>
                     <?php endforeach ?>
                 </div>

@@ -3,20 +3,19 @@ function getParamsTemplate($page)
 {
     switch ($page) {
         case 'header':
-            $paramsTemplate = [
-                'countCart' => countCart()
+        $paramsTemplate = [
+            'countCart' => countCart()
         ];
         break;
         case 'home':
             $paramsTemplate = [
                 'title' => 'HOME PAGE',
-                'resultCalculate' => resultCalculate(),
             ];
             break;
         case 'women':
             $paramsTemplate = [
                 'title' => 'WOMEN',
-                'productList' => getListDB('product', 'ORDER BY `rating` DESC'),
+                'productList' => getArrayDB("SELECT * FROM `product` ORDER BY `rating` DESC;"),
                 'messageLoad' => imageLoad(DIR_CATALOG),
 
             ];
@@ -28,9 +27,9 @@ function getParamsTemplate($page)
             $paramsTemplate = [
                 'title' => 'PRODUCT',
                 'ratingUP' => ratingUp($_GET['id']),
-                'productList' => getListDB('product', 'ORDER BY `rating` DESC'),
-                'productItem' => getListDB('product', 'WHERE id =' . getIdProduct())[0],
-                'commentsList' => getListDB('comments', 'WHERE id_product =' . getIdProduct()),
+                'productList' => getArrayDB("SELECT * FROM `product` ORDER BY `rating` DESC;"),
+                'productItem' => getArrayDB("SELECT * FROM `product`  WHERE id =" . getIdProduct())[0],
+                'commentsList' => getArrayDB("SELECT * FROM `comments` WHERE id_product =" . getIdProduct()),
                 'messageComment' => messageComment(),
                 'selectedComment' => editComment(),
             ];
@@ -41,7 +40,7 @@ function getParamsTemplate($page)
             }
             $paramsTemplate = [
                 'title' => 'ABOUT US',
-                'commentsList' => getListDB('comments'),
+                'commentsList' => getArrayDB("SELECT * FROM `comments`"),
                 'messageComment' => messageComment(),
                 'selectedComment' => editComment(),
             ];
@@ -52,21 +51,25 @@ function getParamsTemplate($page)
             ];
             break;
         case 'cart':
-            $paramsTemplate = [
-                'title' => 'CART',
-                'cartList' => getArrayDB("SELECT 
-                cart.id AS id_cart_item, id_session, product.id AS id_product, color, price, quantity, `name` 
-                FROM cart inner join product on cart.id_product = product.id;")
-            ];
+        $paramsTemplate = [
+            'title' => 'CART',
+            'cartList' => getArrayDB("SELECT 
+            cart.id AS id_cart_item, id_session, product.id AS id_product, color, price, quantity, `name` 
+            FROM cart inner join product on cart.id_product = product.id;")
+        ];
             break;
         case 'api':
             if ($_GET['action'] == 'addToCart') {
                 addToCart($_GET['id_product']);
             }
+            if ($_GET['action'] == 'deleteToCart') {
+                deleteToCart($_GET['id_product']);
+            }
             die;
     }
     return $paramsTemplate;
 }
+
 
 
 function imageLoad($dirCatalog)

@@ -1,4 +1,3 @@
-
 <?php function getIdProduct()
 {
     $url_product = explode("/", $_SERVER['REQUEST_URI']);
