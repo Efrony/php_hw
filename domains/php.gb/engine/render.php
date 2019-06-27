@@ -3,9 +3,9 @@ function renderLayout($page, array $paramsContent = [])
 {
     $layout = renderTemplates(LAYOUTS_DIR . 'main', [
         'content' => renderTemplates($page, $paramsContent),
-        'header' => renderTemplates('header'),
+        'header' => renderTemplates('header', getParamsTemplate('header')),
         'menu' => renderTemplates('menu'),
-        'footer' => renderTemplates('footer'),
+        'footer' => renderTemplates('footer', getParamsTemplate('footer')),
     ]);
     return $layout;
 }

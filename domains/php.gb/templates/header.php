@@ -13,7 +13,7 @@
     <div class="my">
         <a class="cartButton" href="/cart/">
             <img src="/img/Forma_1.png" alt="basket">
-            <div class="cartCount" >1</div>
+            <div class="cartCount" id="cartCount"><?=$countCart?></div>
         </a>
         <a href="/my_account/" class="myAccount">
             My Account

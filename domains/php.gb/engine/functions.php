@@ -2,7 +2,11 @@
 function getParamsTemplate($page)
 {
     switch ($page) {
-
+        case 'header':
+        $paramsTemplate = [
+            'countCart' => countCart()
+        ];
+        break;
         case 'home':
             $paramsTemplate = [
                 'title' => 'HOME PAGE',
@@ -54,18 +58,9 @@ function getParamsTemplate($page)
             break;
         case 'api':
             if ($_GET['action'] == 'addToCart') {
-                echo('dsadsadsadasdddddddddddddddddddddddddddddddddddd');
+                addToCart($_GET['id_product']);
             }
-            if ($_GET['action'] == 'calculate') {
-                $data = json_decode(file_get_contents('php://input'));
-                $result = calculate($data->firstNumber, $data->secondNumber, $data->operator);
-                $response = [
-                    'result' => $result
-                ];
-    
-                header("Content-type: application/json");
-                echo json_encode($response);
-            }
+            die;
     }
     return $paramsTemplate;
 }
@@ -76,17 +71,13 @@ function getIdProduct()
     return $url_product[2];
 }
 
-function getListDB($table, $addition = '')
-{
-    $sql = "SELECT * FROM `{$table}` {$addition};";
-    $list = getArrayDB($sql);
-    return $list;
-}
+
+
 
 function ratingUp($id)
 {
     $id = (int)$id;
-    $sql = "UPDATE `product` SET `rating` =  `rating` + 1 WHERE (`id` = '$id');";
+    $sql = "UPDATE `product` SET `rating` =  `rating` + 1 WHERE (`id` = '{$id}');";
     executeQuery($sql);
 }
 

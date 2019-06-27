@@ -1,8 +1,8 @@
 <?php 
 function getSession1() {
-    return '1session-hashe1';
+    return '111';
 }
 
 function getSession2() {
-    return '2session-hashe2';
+    return '222';
 }

@@ -25,6 +25,13 @@ function getArrayDB($query) {
     return $result_array;
 }
 
+function getListDB($table, $addition = '')
+{
+    $sql = "SELECT * FROM `{$table}` {$addition};";
+    $list = getArrayDB($sql);
+    return $list;
+}
+
 function generateDB($dirCatalog) {  // единоразовый вызов
     $productList = scandir($dirCatalog);  // сканирование дирректории
     $productList = array_slice($productList, 2); //  unset($imagesCatalog[0], $imagesCatalog[1]) удаление точек
