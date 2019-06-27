@@ -55,7 +55,8 @@ function getParamsTemplate($page)
             'title' => 'CART',
             'cartList' => getArrayDB("SELECT 
             cart.id AS id_cart_item, id_session, product.id AS id_product, color, price, quantity, `name` 
-            FROM cart inner join product on cart.id_product = product.id;")
+            FROM cart inner join product on cart.id_product = product.id
+            AND id_session =" . getSession1())
         ];
             break;
         case 'api':
