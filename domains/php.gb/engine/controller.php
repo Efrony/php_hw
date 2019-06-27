@@ -3,8 +3,8 @@ function getParamsTemplate($page)
 {
     switch ($page) {
         case 'header':
-        $paramsTemplate = [
-            'countCart' => countCart()
+            $paramsTemplate = [
+                'countCart' => countCart()
         ];
         break;
         case 'home':
@@ -54,6 +54,9 @@ function getParamsTemplate($page)
         case 'cart':
             $paramsTemplate = [
                 'title' => 'CART',
+                'cartList' => getArrayDB("SELECT 
+                cart.id AS id_cart_item, id_session, product.id AS id_product, color, price, quantity, `name` 
+                FROM cart inner join product on cart.id_product = product.id;")
             ];
             break;
         case 'api':
@@ -63,22 +66,6 @@ function getParamsTemplate($page)
             die;
     }
     return $paramsTemplate;
-}
-
-function getIdProduct()
-{
-    $url_product = explode("/", $_SERVER['REQUEST_URI']);
-    return $url_product[2];
-}
-
-
-
-
-function ratingUp($id)
-{
-    $id = (int)$id;
-    $sql = "UPDATE `product` SET `rating` =  `rating` + 1 WHERE (`id` = '{$id}');";
-    executeQuery($sql);
 }
 
 

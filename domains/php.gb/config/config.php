@@ -10,10 +10,10 @@ define("USER", 'root');
 define("PASSWORD", '');
 
 
-include ('../engine/functions.php');
+include ('../engine/controller.php');
 include ('../engine/render.php');
 include ('../engine/db.php');
-include ('../engine/calculate.php');
+include ('../engine/catalog.php');
 include ('../engine/comments.php');
 include ('../engine/cart.php');
 include ('../engine/auth.php');

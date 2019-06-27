@@ -17,22 +17,24 @@
                     <div>ACTION</div>
                 </div>
                 <div class="productCart" id="productCart">
-                    <div class="productItem" :id="product_item.article">
-                        <figure>
-                            <a href="#"><img src="'img/product/'+ product_item.article + '.jpg'" alt="product_item.article"></a>
-                            <figcaption>{{product_item.name}}
-                                <p><b>Color:</b> Red
-                                    <br><b>Size:</b> Xll</p>
-                            </figcaption>
-                        </figure>
-                        <div class="unitePrice">$ {{product_item.price}}</div>
-                        <div class="quantity">
-                            <input type="text" value="product_item.count" class="countInput">
+                    <?php foreach ($cartList as $cartItem) : ?>
+                        <div class="productItem" id="cart_item">
+                            <figure>
+                                <a href="#"><img src="/<?= (DIR_CATALOG .  $cartItem['id_product']) . '.jpg'; ?>"></a>
+                                <figcaption><?=$cartItem['name']?>
+                                    <p><b>Color:</b><?=$cartItem['color']?>
+                                        <br><b>Size:</b> Xll</p>
+                                </figcaption>
+                            </figure>
+                            <div class="unitePrice">$ <?=$cartItem['price']?></div>
+                            <div class="quantity">
+                                <input type="text" value="<?=$cartItem['quantity']?>" class="countInput">
+                            </div>
+                            <div class="shipping">FREE</div>
+                            <div class="subtotal">$ <?=$cartItem['price'] * $cartItem['quantity']?></div>
+                            <div class="action"> <a href="#"><img class="deleteButton" src="/img/cart/delete.png" alt="del"></a></div>
                         </div>
-                        <div class="shipping">FREE</div>
-                        <div class="subtotal">$ {{product_item.price * product_item.count}}</div>
-                        <div class="action"> <a href="#"><img class="deleteButton" src="/img/cart/delete.png" alt="del"></a></div>
-                    </div>
+                    <?php endforeach ?>
                 </div>
             </div>
         </div>

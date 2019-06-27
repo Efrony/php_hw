@@ -5,7 +5,7 @@ function renderLayout($page, array $paramsContent = [])
         'content' => renderTemplates($page, $paramsContent),
         'header' => renderTemplates('header', getParamsTemplate('header')),
         'menu' => renderTemplates('menu'),
-        'footer' => renderTemplates('footer', getParamsTemplate('footer')),
+        'footer' => renderTemplates('footer'),
     ]);
     return $layout;
 }
