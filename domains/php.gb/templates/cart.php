@@ -18,7 +18,7 @@
                 </div>
                 <div class="productCart" id="productCart">
                     <?php foreach ($cartList as $cartItem) : ?>
-                        <div class="productItem" id="cart_item">
+                        <div class="productItem" id="cart_number_<?=$cartItem['id_cart_item']?>">
                             <figure>
                                 <a href="#"><img src="/<?= (DIR_CATALOG .  $cartItem['id_product']) . '.jpg'; ?>"></a>
                                 <figcaption><?=$cartItem['name']?>
@@ -32,7 +32,7 @@
                             </div>
                             <div class="shipping">FREE</div>
                             <div class="subtotal">$ <?=$cartItem['price'] * $cartItem['quantity']?></div>
-                            <div class="action"> <a href="#"><img class="deleteButton" id="deleteButton" data-id="<?=$cartItem['id_cart_item']?>" src="/img/cart/delete.png" alt="del"></a></div>
+                            <div class="action"> <a href="#"><img onclick="return false" class="deleteButton" id="deleteButton" data-id="<?=$cartItem['id_cart_item']?>" src="/img/cart/delete.png" alt="del"></a></div>
                         </div>
                     <?php endforeach ?>
                 </div>

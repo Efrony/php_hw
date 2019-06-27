@@ -59,13 +59,14 @@ function getParamsTemplate($page)
         ];
             break;
         case 'api':
-            if ($_GET['action'] == 'addToCart') {
-                addToCart($_GET['id_product']);
+            if ($_GET['action'] === 'addToCart') {
+                addToCart();
             }
-            if ($_GET['action'] == 'deleteToCart') {
-                deleteToCart($_GET['id_product']);
+            if ($_GET['action'] === 'deleteToCart') {
+                deleteToCart();
             }
             die;
+
     }
     return $paramsTemplate;
 }

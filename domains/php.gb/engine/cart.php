@@ -7,7 +7,7 @@ function countCart(){
     return count($cartList);
 }
 
-function addToCart($id_product)
+function addToCart()
 {
     $session = getSession1();
     $data = json_decode(file_get_contents('php://input'));
@@ -23,7 +23,7 @@ function addToCart($id_product)
     echo json_encode($response);
 }
 
-function deleteToCart($id_cart_item){
+function deleteToCart(){
     $session = getSession1();
     $data = json_decode(file_get_contents('php://input'));
     $id_cart_item = $data->id_cart_item;
@@ -31,9 +31,10 @@ function deleteToCart($id_cart_item){
     executeQuery("DELETE FROM `cart` WHERE (`id` = '{$id_cart_item}')");
 
     $response = [
+        'id_deleted' => $id_cart_item,
         'countCart' => countCart()
-    ];
 
+    ];
     header("Content-type: application/json");
     echo json_encode($response);
 }
