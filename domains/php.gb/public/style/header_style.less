@@ -127,20 +127,22 @@ header {
 
         }
 
-        .myAccount,
-        .myAccountMenu {
+        .myAccount a {
             text-decoration: none;
-            padding: 10px 19px;
-            background-color: #f16d7f;
             color: #ffffff;
             font-size: 15px;
             font-weight: 400;
+        }
+
+        .myAccount,
+        .myAccountExit {
+            padding: 10px 19px;
+            background-color: #f16d7f;
             position: relative;
             border: none;
-            display: block;
             cursor: pointer;
 
-            &:hover .myAccountMenu {
+            &:hover .myAccountExit {
                 display: block;
             }
 
@@ -149,7 +151,7 @@ header {
             }
         }
 
-        .myAccountMenu {
+        .myAccountExit {
             display: none;
             position: absolute;
             bottom: -38px;

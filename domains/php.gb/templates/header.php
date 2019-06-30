@@ -11,18 +11,25 @@
         </div>
     </div>
     <div class="my">
+        <?php if (isAuth()) : ?>
+            <a class="authEmail" href="/my_account/"><?= $myEmail ?></a>
+        <?php endif ?>
         <a class="cartButton" href="/cart/">
             <img src="/img/Forma_1.png" alt="basket">
             <div class="cartCount" id="cartCount"><?= $countCart ?></div>
         </a>
         <?php if (isAuth()) : ?>
-            <a href="/my_account/" class="myAccount">
-                My Account
-                <i class="fas fa-caret-down"></i>
-                <div class="myAccountMenu">Exit</div>
-            </a>
+            <div class="myAccount">
+                <a href="/my_account/">
+                    My Account
+                    <i class="fas fa-caret-down"></i>
+                </a>
+                <a class="myAccountExit" href="/my_account/?exit=ok">Exit</a>
+            </div>
         <?php else : ?>
-            <a href="/my_account/" class="myAccount">Sign in / Registration</a>
+            <div class="myAccount">
+                <a href="/my_account/">Sign in / Registration</a>
+            </div>
         <?php endif ?>
     </div>
 </header>

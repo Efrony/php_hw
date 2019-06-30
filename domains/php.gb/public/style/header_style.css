@@ -119,28 +119,29 @@ header .my .cartButton .cartCount {
 header .my .myAccount {
   margin-left: 5px;
 }
-header .my .myAccount,
-header .my .myAccountMenu {
+header .my .myAccount a {
   text-decoration: none;
-  padding: 10px 19px;
-  background-color: #f16d7f;
   color: #ffffff;
   font-size: 15px;
   font-weight: 400;
+}
+header .my .myAccount,
+header .my .myAccountExit {
+  padding: 10px 19px;
+  background-color: #f16d7f;
   position: relative;
   border: none;
-  display: block;
   cursor: pointer;
 }
-header .my .myAccount:hover .myAccountMenu,
-header .my .myAccountMenu:hover .myAccountMenu {
+header .my .myAccount:hover .myAccountExit,
+header .my .myAccountExit:hover .myAccountExit {
   display: block;
 }
 header .my .myAccount i,
-header .my .myAccountMenu i {
+header .my .myAccountExit i {
   font-size: 14px;
 }
-header .my .myAccountMenu {
+header .my .myAccountExit {
   display: none;
   position: absolute;
   bottom: -38px;

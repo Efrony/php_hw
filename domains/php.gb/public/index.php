@@ -8,6 +8,7 @@ if ($url_array[1] == '') {
     $page = $url_array[1];
 }
 
+
 // generateDB(DIR_CATALOG); 
 
 $paramsTemplate = getParamsTemplate($page);

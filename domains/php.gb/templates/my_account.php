@@ -32,24 +32,24 @@
                 <p id="messageRegistr"></p>
                 <input type="submit" name="register" id ="registrationButton" value="register">
             </form>
-            <form id="login" class="data-2" name="loginForm">
+            <form method='post' id="login" class="data-2" name="loginForm" >
                 <h5>sign in</h5>
                 <p class="point">Already registed?</p>
                 <p class="about">Please log in below</p>
                 <p class="point inp"> EMAIL ADDRESS <span class="red">*</span></p>
-                <input type="email" name="email" required>
+                <input type="email" name="login" required value="<?=$_POST['login']?>" placeholder="admin@admin.com">
                 <p class="point inp"> PASSWORD <span class="red">*</span></p>
-                <input type="password" name="password" required>
+                <input type="password" name="password" required value="<?=$_POST['password']?>">
                 <div class="point">
                     <p class="point inp">Remember me:</p>
-                    <input type="radio" name='choice' id="ch-1" value="yes" checked>
+                    <input type="radio" name='remember' id="ch-1" value="yes" checked>
                     <label for="ch-1">Yes</label><br>
-                    <input type="radio" name='choice' id="ch-2" value="no">
+                    <input type="radio" name='remember' id="ch-2" value="no">
                     <label for="ch-2">No</label>
                 </div>
-                <p id="messageLogin">{{errorsLogin}}</p>
                 <p><span class="red">* Required Fileds</span></p>
-                <input type="submit" value="LOG IN">
+                <p id="messageLogin" class="invalidForm"><?=$_GET['loginmessage']?></p>
+                <input type="submit" name="loginButton" value="LOG IN">
             </form>
         </section>
     <?php endif ?>

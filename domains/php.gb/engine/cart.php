@@ -2,15 +2,17 @@
 
 function countCart()
 {
-    $session = getSession1();
-    $sqlSumm = "SELECT * FROM `cart` WHERE id_session = {$session};";
+    $session = session_id();
+    $sqlSumm = "SELECT * FROM `cart` WHERE id_session = '{$session}';";
+
+
     $cartList = getArrayDB($sqlSumm);
     return count($cartList);
 }
 
 function addToCart()
 {
-    $session = getSession1();
+    $session = session_id();
     $data = json_decode(file_get_contents('php://input'));
     $id_product = $data->id_product;
 
@@ -26,11 +28,11 @@ function addToCart()
 
 function deleteToCart()
 {
-    $session = getSession1();
+    $session = session_id();
     $data = json_decode(file_get_contents('php://input'));
     $id_cart_item = $data->id_cart_item;
 
-    executeQuery("DELETE FROM `cart` WHERE (`id` = '{$id_cart_item}')");
+    executeQuery("DELETE FROM `cart` WHERE `id` = '{$id_cart_item}' AND id_session = '{$session}';");
 
     $response = [
         'id_deleted' => $id_cart_item,
@@ -43,8 +45,9 @@ function deleteToCart()
 
 function getCartList()
 {
+    $session = session_id();
     return getArrayDB("SELECT 
             cart.id AS id_cart_item, id_session, product.id AS id_product, color, price, quantity, `name` 
             FROM cart inner join product on cart.id_product = product.id
-            AND id_session =" . getSession1());
+            AND id_session = '{$session}';");
 }

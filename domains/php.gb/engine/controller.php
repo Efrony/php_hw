@@ -1,10 +1,15 @@
 <?php
 function getParamsTemplate($page)
 {
+    session_start();
     switch ($page) {
         case 'header':
+            if (isset($_GET['exit'])) {
+                logout();
+            }
             $paramsTemplate = [
-                'countCart' => countCart()
+                'countCart' => countCart(),
+                'myEmail' => getUser(),
             ];
             break;
         case 'home':
@@ -46,6 +51,9 @@ function getParamsTemplate($page)
             ];
             break;
         case 'my_account':
+            if (isset($_POST['loginButton'])) {
+                login();
+            }
             $paramsTemplate = [
                 'title' => 'MY ACCOUNT',
             ];
@@ -68,8 +76,8 @@ function getParamsTemplate($page)
             }
             die;
         case 'my_ccount':
-            if (isset($_POST['register'])) {
-                registration();
+            if (isset($_POST['loginButton'])) {
+                login();
             }
             $paramsTemplate = [
                 'title' => 'MY ACCOUNT',
