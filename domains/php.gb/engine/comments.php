@@ -70,7 +70,7 @@ function editComment()
 }
 
 function saveComment()
-{   
+{
     $id = (int)$_POST['id_comment'];
     $nameComment = mysqli_real_escape_string(getDB(), (string)htmlspecialchars(strip_tags($_POST['nameComment'])));
     $emailComment = mysqli_real_escape_string(getDB(), (string)htmlspecialchars(strip_tags($_POST['emailComment'])));
@@ -81,3 +81,13 @@ function saveComment()
     header("Location: ?message=save");
 }
 
+
+function getListCommentsWithID()
+{
+    return getArrayDB("SELECT * FROM `comments` WHERE id_product =" . getIdProduct());
+}
+
+function getListComments()
+{
+    return getArrayDB("SELECT * FROM `comments`");
+}

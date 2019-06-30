@@ -7,6 +7,8 @@ window.onload = function () {
     for (var i = 0; i < $deleteToCartButtons.length; i++) {
         $deleteToCartButtons[i].addEventListener('click', deleteToCart)
     }
+    $registrationButton = document.getElementById('registrationButton')
+    $registrationButton.addEventListener('click', registration)
 }
 
 function addToCart(event) {
@@ -47,3 +49,28 @@ function deleteToCart(event) {
 }
 
 
+function registration() {
+    $registrForm = document.getElementById('registr')
+    $name = $registrForm.name.value
+    $email = $registrForm.email.value
+    $password = $registrForm.password.value
+    $phone = $registrForm.phone.value
+    fetch('/api/?action=registration', {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify({
+                name: $name,
+                email: $email,
+                password: $password,
+                phone: $phone,
+            })
+        })
+        .then(response => response.json())
+        .then(res => {
+            $message = document.getElementById('messageRegistr')
+            $message.innerHTML = res['message']
+            $message.className = res['classValid']
+        })
+}

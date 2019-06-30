@@ -3,10 +3,10 @@ function getParamsTemplate($page)
 {
     switch ($page) {
         case 'header':
-        $paramsTemplate = [
-            'countCart' => countCart()
-        ];
-        break;
+            $paramsTemplate = [
+                'countCart' => countCart()
+            ];
+            break;
         case 'home':
             $paramsTemplate = [
                 'title' => 'HOME PAGE',
@@ -15,7 +15,7 @@ function getParamsTemplate($page)
         case 'women':
             $paramsTemplate = [
                 'title' => 'WOMEN',
-                'productList' => getArrayDB("SELECT * FROM `product` ORDER BY `rating` DESC;"),
+                'productList' => getListProductWithRating(),
                 'messageLoad' => imageLoad(DIR_CATALOG),
 
             ];
@@ -27,9 +27,9 @@ function getParamsTemplate($page)
             $paramsTemplate = [
                 'title' => 'PRODUCT',
                 'ratingUP' => ratingUp($_GET['id']),
-                'productList' => getArrayDB("SELECT * FROM `product` ORDER BY `rating` DESC;"),
-                'productItem' => getArrayDB("SELECT * FROM `product`  WHERE id =" . getIdProduct())[0],
-                'commentsList' => getArrayDB("SELECT * FROM `comments` WHERE id_product =" . getIdProduct()),
+                'productList' => getListProductWithRating(),
+                'productItem' => getListProductWithID(),
+                'commentsList' =>  getListCommentsWithID(),
                 'messageComment' => messageComment(),
                 'selectedComment' => editComment(),
             ];
@@ -40,7 +40,7 @@ function getParamsTemplate($page)
             }
             $paramsTemplate = [
                 'title' => 'ABOUT US',
-                'commentsList' => getArrayDB("SELECT * FROM `comments`"),
+                'commentsList' => getListComments(),
                 'messageComment' => messageComment(),
                 'selectedComment' => editComment(),
             ];
@@ -51,13 +51,10 @@ function getParamsTemplate($page)
             ];
             break;
         case 'cart':
-        $paramsTemplate = [
-            'title' => 'CART',
-            'cartList' => getArrayDB("SELECT 
-            cart.id AS id_cart_item, id_session, product.id AS id_product, color, price, quantity, `name` 
-            FROM cart inner join product on cart.id_product = product.id
-            AND id_session =" . getSession1())
-        ];
+            $paramsTemplate = [
+                'title' => 'CART',
+                'cartList' => getCartList()
+            ];
             break;
         case 'api':
             if ($_GET['action'] === 'addToCart') {
@@ -66,31 +63,18 @@ function getParamsTemplate($page)
             if ($_GET['action'] === 'deleteToCart') {
                 deleteToCart();
             }
+            if ($_GET['action'] === 'registration') {
+                registration();
+            }
             die;
-
+        case 'my_ccount':
+            if (isset($_POST['register'])) {
+                registration();
+            }
+            $paramsTemplate = [
+                'title' => 'MY ACCOUNT',
+            ];
+            break;
     }
     return $paramsTemplate;
-}
-
-
-
-function imageLoad($dirCatalog)
-{
-    if (isset($_POST['loadbutton'])) {
-        if ($_FILES['loadfile']['type'] == 'image/jpeg'  && $_FILES['loadfile']['size'] <= 2000000) {
-            $name = $_FILES['loadfile']['name'];
-            $path = $dirCatalog . $name;
-            if (move_uploaded_file($_FILES['loadfile']['tmp_name'], $path)) {
-                $message = "Файл загружен. Перезагрузите страницу";
-                executeQuery("INSERT INTO `product` (`name`, `rating`) VALUES ('{$name}', '0');");
-            } else {
-                $message = "Ошибка загрузки";
-            }
-        } else {
-            $message = "Файл не соответсвует требованиям";
-        }
-    }
-    //header("Location: index.php/?messageLoad={$message}");
-    //exit();
-    return $message;
 }

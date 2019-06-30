@@ -13,13 +13,16 @@
     <div class="my">
         <a class="cartButton" href="/cart/">
             <img src="/img/Forma_1.png" alt="basket">
-            <div class="cartCount" id="cartCount" ><?=$countCart?></div>
+            <div class="cartCount" id="cartCount"><?= $countCart ?></div>
         </a>
-        <a href="/my_account/" class="myAccount">
-            My Account
-            <i class="fas fa-caret-down"></i>
-            <div class="myAccountMenu">Exit</div>
-        </a>
-        <a href="/my_account/" class="myAccount">Sign in / Registration</a>
+        <?php if (isAuth()) : ?>
+            <a href="/my_account/" class="myAccount">
+                My Account
+                <i class="fas fa-caret-down"></i>
+                <div class="myAccountMenu">Exit</div>
+            </a>
+        <?php else : ?>
+            <a href="/my_account/" class="myAccount">Sign in / Registration</a>
+        <?php endif ?>
     </div>
 </header>

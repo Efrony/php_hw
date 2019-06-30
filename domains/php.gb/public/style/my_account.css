@@ -105,15 +105,18 @@
   padding: 0 15px;
   width: 70%;
 }
-.register section #errors {
-  color: red;
+.register section #messageRegistr,
+.register section #messageLogin {
   font-weight: bold;
+  outline: none;
 }
 .register .validForm {
   outline: 1px solid green;
+  color: green;
 }
 .register .invalidForm {
   outline: 1px solid red;
+  color: red;
 }
 .register details h5 {
   line-height: 70px;
