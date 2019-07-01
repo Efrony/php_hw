@@ -13,7 +13,7 @@ function login()  // после нажатия кнопки логин
         if ($_POST['remember'] == 'yes') { // если нажата кнопка Запомнить 
             $hash = uniqid(rand(), true);  // генерировать случайный хэш
             $id = mysqli_real_escape_string(getDB(), (string)htmlspecialchars(strip_tags($_SESSION['id'])));
-            executeQuery("UPDATE `shop`.`users` SET `hash` = '{$hash}' WHERE (`id` = '{$id}');"); // записать новый хэш в бд
+            executeQuery("UPDATE `users` SET `hash` = '{$hash}' WHERE (`id` = '{$id}');"); // записать новый хэш в бд
             setcookie("hash", $hash, time() + 36000, '/');  //  установить куки
         }
     }
@@ -22,7 +22,7 @@ function login()  // после нажатия кнопки логин
 function isCompliance($login, $pass)
 {
     $login = mysqli_real_escape_string(getDB(), (string)htmlspecialchars(strip_tags($login)));
-    $result = executeQuery("SELECT * FROM shop.users WHERE email = '{$login}';");
+    $result = executeQuery("SELECT * FROM `users` WHERE email = '{$login}';");
     $row = mysqli_fetch_assoc($result);
     if (password_verify($pass, $row['password'])) {
         $_SESSION['login'] = $login;
@@ -54,7 +54,7 @@ function isAuth() //проверка авторизации
 {
     if (isset($_COOKIE['hash'])) {
         $hash = $_COOKIE['hash'];
-        $result = executeQuery("SELECT * FROM shop.users WHERE `hash` = '{$hash}';");
+        $result = executeQuery("SELECT * FROM `users` WHERE `hash` = '{$hash}';");
         $row = mysqli_fetch_assoc($result);
         $user = $row['login'];
         if (!empty($user)) {
