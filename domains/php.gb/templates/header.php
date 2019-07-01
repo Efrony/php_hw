@@ -1,3 +1,4 @@
+
 <header>
     <div class="logoSearch">
         <div class="logo">
@@ -11,9 +12,9 @@
         </div>
     </div>
     <div class="my">
-        <?php if (isAuth()) : ?>
+
             <a class="authEmail" href="/my_account/"><?= $myEmail ?></a>
-        <?php endif ?>
+
         <a class="cartButton" href="/cart/">
             <img src="/img/Forma_1.png" alt="basket">
             <div class="cartCount" id="cartCount"><?= $countCart ?></div>

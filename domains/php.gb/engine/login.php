@@ -17,6 +17,7 @@ function login()  // после нажатия кнопки логин
             setcookie("hash", $hash, time() + 36000, '/');  //  установить куки
         }
     }
+    header("Location: /my_account/");
 }
 
 function isCompliance($login, $pass)
@@ -47,7 +48,7 @@ function onceSaveCartID($row)
 
 function getUser()
 {
-    return isAuth() ? $_SESSION["login"] : "guest";
+    return isAuth() ? $_SESSION["login"] : "Guest";
 }
 
 function isAuth() //проверка авторизации 
@@ -56,7 +57,7 @@ function isAuth() //проверка авторизации
         $hash = $_COOKIE['hash'];
         $result = executeQuery("SELECT * FROM `users` WHERE `hash` = '{$hash}';");
         $row = mysqli_fetch_assoc($result);
-        $user = $row['login'];
+        $user = $row['email'];
         if (!empty($user)) {
             $_SESSION['login'] = $user;
         }
