@@ -58,26 +58,27 @@
                     <option value="Bangladesh">Bangladesh</option>
                     <option value="France">France</option>
                 </datalist>
-                <input type="text" placeholder="State" id="state" name="state">
-                <input type="text" id="zip" name="zip" placeholder="Postcode / Zip"> </form>
-            <input type="submit" value="get a quote">
+                <input type="text" placeholder="City" id="state" name="state">
+                <input type="text" id="zip" name="zip" placeholder="Street"> </form>
+            <input type="submit" value="Map">
         </div>
-        <div class="couponDiscount"><span>coupon discount</span>
-            <p>Enter your coupon code if you have one</p>
+        <div class="couponDiscount"><span>personal data</span>
+            <p>Enter your name and phone</p>
             <form action="#">
-                <input type="text" placeholder="State" id="state1" name="state">
+                <input type="text" placeholder="Name" id="state1" name="state">
+                <input type="text" placeholder="Phone" id="state1" name="state">
                 <input type="submit" value="Apply coupon"> </form>
         </div>
         <div class="grandTotal">
             <div class="price" id="priceTotal">
-                Sub total &nbsp;&nbsp;&nbsp;&nbsp;$ {{sumCart}}
-                <p>GRAND TOTAL
+                Sub total &nbsp;&nbsp;&nbsp;&nbsp; $<span id="summAllCart"> <?= $summCart ?></span>
+                <p>GRAND TOTAL $
                     <span id="grandTotal">
-                        &nbsp;&nbsp;&nbsp;$ {{sumCart}}
+                        &nbsp;&nbsp;&nbsp; <?= $summCart ?>
                     </span>
                 </p>
             </div>
-            <a href="#">proceed to checkout</a>
+            <a href="#">SEND ORDER</a>
         </div>
     </div>
 </main>

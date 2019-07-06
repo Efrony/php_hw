@@ -25,6 +25,8 @@ function addToCart(event) {
         .then(response => response.json())
         .then(res => {
             document.getElementById('cartCount').innerHTML = res['countCart']
+            document.getElementById('summAllCart').innerHTML = res['summCart']
+            document.getElementById('grandTotal').innerHTML  = res['summCart']
         })
 }
 
@@ -45,6 +47,9 @@ function deleteToCart(event) {
             deleted_item = document.getElementById(cart_number)
             deleted_item.remove()
             document.getElementById('cartCount').innerHTML = res['countCart']
+
+            document.getElementById('summAllCart').innerHTML = res['summCart']
+            document.getElementById('grandTotal').innerHTML  = res['summCart']
         })
 }
 

@@ -4,11 +4,20 @@ function countCart()
 {
     $session = session_id();
     $sqlSumm = "SELECT * FROM `cart` WHERE id_session = '{$session}';";
-
-
     $cartList = getArrayDB($sqlSumm);
     return count($cartList);
 }
+
+function summCart()
+{
+    $cartList = getCartList();
+    $summCart= 0;
+    foreach ($cartList as $itemProduct) {
+        $summCart += $itemProduct['price'] * $itemProduct['quantity'];
+    }
+    return $summCart;
+}
+
 
 function addToCart()
 {
@@ -17,9 +26,9 @@ function addToCart()
     $id_product = $data->id_product;
 
     executeQuery("INSERT INTO `cart` (`id_session`, `id_product`, `quantity`) VALUES ('{$session}', '{$id_product}', '1');");
-
     $response = [
-        'countCart' => countCart()
+        'countCart' => countCart(),
+        'summCart' => summCart()
     ];
 
     header("Content-type: application/json");
@@ -36,7 +45,8 @@ function deleteToCart()
 
     $response = [
         'id_deleted' => $id_cart_item,
-        'countCart' => countCart()
+        'countCart' => countCart(),
+        'summCart' => summCart()
 
     ];
     header("Content-type: application/json");
