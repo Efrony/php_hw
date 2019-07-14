@@ -11,7 +11,7 @@ window.onload = function () {
     // $registrationButton.addEventListener('click', registration)
 
     fromProduct = 24
-    countProduct = 100
+    countProduct = 24
     $showMoreButton = document.getElementById('showMore')
     $showMoreButton.addEventListener('click', showMore)
 }
