@@ -4,30 +4,11 @@ function showMore()
     $data = json_decode(file_get_contents('php://input'));
     $fromProduct = $data->fromProduct;
     $countProduct = $data->countProduct;
-
     $newProducts = getArrayDB("SELECT * FROM `product` ORDER BY `rating` DESC LIMIT $fromProduct, $countProduct;");
 
     header("Content-type: text/html; charset=utf-8;");
-    ob_start();
-
-    foreach ($newProducts as $itemProduct) {
-    $showNewProducts = '
-    <a href="/product/' . $itemProduct['id'] . '/?id=' . $itemProduct['id'] . '">
-        <figure class="productItem">
-            <img src="/' . DIR_CATALOG . $itemProduct['img_id'] . '.jpg" alt="productFoto">
-            <div class="shadowHover">
-                <button onclick="return false" class="addToCart" data-id="' . $itemProduct['id'] . '">&ensp;Add to Cart</button>
-            </div>
-            <figcaption>' . $itemProduct['color'] . ' ' . $itemProduct['name'] .
-                '<p>$' . $itemProduct['price'] . '</p>
-                <i class="fa fa-eye" aria-hidden="true"></i><span class="raring"> ' . $itemProduct['rating'] . '</span>
-            </figcaption>
-        </figure>
-    </a>';
-    echo $showNewProducts;
-    }
+    echo renderTemplates('catalog', ['productList' => $newProducts]);
     
-   // ob_get_clean();
 }
 
 function getIdProduct()
@@ -55,7 +36,6 @@ function getListProductWithID()
 }
 
 
-
 function imageLoad($dirCatalog)
 {
     if (isset($_POST['loadbutton'])) {
@@ -72,7 +52,5 @@ function imageLoad($dirCatalog)
             $message = "Файл не соответсвует требованиям";
         }
     }
-    //header("Location: index.php/?messageLoad={$message}");
-    //exit();
     return $message;
 }

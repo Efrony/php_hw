@@ -20,8 +20,8 @@ function getParamsTemplate($page)
         case 'women':
             $paramsTemplate = [
                 'title' => 'WOMEN',
-                'productList' => getListProductWithRating(),
                 'messageLoad' => imageLoad(DIR_CATALOG),
+                'catalog' => renderTemplates('catalog',['productList' => getListProductWithRating()] )
 
             ];
             break;
