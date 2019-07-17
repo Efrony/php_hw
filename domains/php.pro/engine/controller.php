@@ -61,7 +61,8 @@ function getParamsTemplate($page)
         case 'cart':
             $paramsTemplate = [
                 'title' => 'CART',
-                'cartList' => getCartList()
+                'cartList' => getCartList(),
+                'countCart' => countCart()
             ];
             break;
         case 'api':
