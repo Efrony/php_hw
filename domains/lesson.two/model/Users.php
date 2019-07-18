@@ -1,15 +1,14 @@
 <?php
 
-
 namespace app\model;
 
-class Users extends Model
+class Users extends DbModel
 {
     public $id;
     public $login;
     public $pass;
 
-    public function getNameTable()
+    public static function getNameTable()
     {
         return 'users';
     }

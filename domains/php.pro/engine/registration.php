@@ -24,6 +24,7 @@ function registration()
 
         executeQuery("INSERT INTO `users` (`name`, `email`, `password`, `phone`) VALUES (:id_name, :email, :id_hash, :phone);", $params);
 
+        
         $message = 'Регистрация прошла успешно';
         $classValid =  'validForm';
     }

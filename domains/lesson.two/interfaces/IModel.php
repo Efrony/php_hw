@@ -6,9 +6,15 @@ namespace app\interfaces;
 
 interface IModel
 {
-    public function getNameTable();
+    public static function getNameTable();
 
-    public function getOneFromDb($id);
+    public static function getOne($id);
 
-    public function getAllFromDb();
-}
+    public static function getAll();
+
+    public static function insert();
+
+    public static function update();
+
+    public static function delete();
+    }
