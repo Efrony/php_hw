@@ -1,4 +1,24 @@
 <?php
+//=========================test=================
+$host = '127.0.0.1';
+$db   = 'shop';
+$user = 'root';
+$pass = '';
+$charset = 'utf8';
+
+$dsn = "mysql:host=$host;dbname=$db;charset=$charset";
+
+$opt = [
+    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC, // fetch(PDO::FETCH_ASSOC)) fetch(PDO::FETCH_LAZY))
+    PDO::ATTR_EMULATE_PREPARES   => false,
+];
+
+$pdo = new PDO($dsn, $user, $pass, $opt);
+
+$stmt = $pdo->query('SELECT * FROM product');
+//==============================================
+
 function getDB()
 {
     static $sqlConnect = null;
@@ -9,14 +29,15 @@ function getDB()
     return $sqlConnect;
 }
 
-function executeQuery($sql){
+function executeQuery($sql)
+{
     $link = getDB();
     $result = @mysqli_query($link, $sql) or die(mysqli_error($link));
     return $result;
 }
 
-
-function getArrayDB($query) {
+function getArrayDB($query)
+{
     $link = getDB();
     $result = @mysqli_query($link, $query) or die(mysqli_error($link));
     $result_array = [];
@@ -26,6 +47,8 @@ function getArrayDB($query) {
     return $result_array;
 }
 
+
+/*
 function generateDB($dirCatalog) {  // единоразовый вызов
     $productList = scandir($dirCatalog);  // сканирование дирректории
     $productList = array_slice($productList, 2); //  unset($imagesCatalog[0], $imagesCatalog[1]) удаление точек
@@ -33,7 +56,4 @@ function generateDB($dirCatalog) {  // единоразовый вызов
         mysqli_query(getDB(), "INSERT INTO `product` (`name`, `rating`) VALUES ('{$item}', '0');");
     }
 }
-
-
-// 
- 
+*/
