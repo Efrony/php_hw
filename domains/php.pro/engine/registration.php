@@ -7,12 +7,22 @@ function registration()
     $email = $data->email;
     $password = $data->password;
     $phone = $data->phone;
+
+
     if (isRegistred($email)) {
         $message = 'Такой e-mail уже зарегистрирован';
         $classValid =  'invalidForm ';
     } else {
         $hash = password_hash($password, PASSWORD_DEFAULT);
-        executeQuery("INSERT INTO `users` (`name`, `email`, `password`, `phone`) VALUES ('{$name}', '{$email}', '{$hash}', '{$phone}');");
+        
+        $params = [
+            'id_name' =>$name,
+            'email' =>$email,
+            'phone' =>$phone,
+            'id_hash' => $hash
+        ];
+
+        executeQuery("INSERT INTO `users` (`name`, `email`, `password`, `phone`) VALUES (:id_name, :email, :id_hash, :phone);", $params);
 
         $message = 'Регистрация прошла успешно';
         $classValid =  'validForm';
@@ -28,8 +38,7 @@ function registration()
 
 function isRegistred($email)
 {
-    $result = getArrayDB("SELECT email FROM users WHERE email = '{$email}';");
-    $row = $result[0];
+    $row = getOneDB("SELECT email FROM users WHERE email = :email;" , ['email'=> $email]);
     if (is_null($row['email'])) {
         return false;
     } else {

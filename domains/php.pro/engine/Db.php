@@ -1,5 +1,5 @@
 <?php
-//=========================test=================
+
 class Db
 {
     private $connection = null;
@@ -47,7 +47,7 @@ class Db
         return $stmt;
     }
 
-    public function execute($sql, $params)
+    public function execute($sql, $params = [])
     {
         $this->query($sql, $params);
         return true;
@@ -64,54 +64,40 @@ class Db
     }
 }
 
-/*
-$db = new Db;
-$stmt = $db->queryOne('SELECT * FROM product WHERE id = :id', ['id' => 10]);
-var_dump($stmt);
 
-while ($row = $stmt->fetch()) {
-    echo $row['name'] . "<br>";
-    echo  "<br>";
-}
-
-die;*/
-//==============================================
 
 function getDB()
 {
-    static $sqlConnect = null;
-    if (is_null($sqlConnect)) {
-        $sqlConnect = @mysqli_connect(HOST, USER, PASSWORD, DATABASE)
-            or die("Ошибка соединения с БД" . mysqli_connect_error());
+    static $db = null;
+    if (is_null($db)) {
+        $db = new Db;
     }
-    return $sqlConnect;
+    return $db;
 }
 
-function executeQuery($sql)
+function executeQuery($sql, $params = [])
 {
-    $link = getDB();
-    $result = @mysqli_query($link, $sql) or die(mysqli_error($link));
-    return $result;
+    $stmt = getDB();
+    return $stmt->execute($sql, $params);
 }
 
-function getArrayDB($query)
+function getArrayDB($sql, $params = [])
 {
-    $link = getDB();
-    $result = @mysqli_query($link, $query) or die(mysqli_error($link));
-    $result_array = [];
-    foreach ($result as $row) {
-        $result_array[] = $row;
-    }
-    return $result_array;
+    $stmt = getDB();
+    return $stmt->queryAll($sql, $params);
 }
 
+function getOneDB($sql, $params = [])
+{
+    $stmt = getDB();
+    return $stmt->queryOne($sql, $params);
+}
 
 /*
-function generateDB($dirCatalog) {  // единоразовый вызов
-    $productList = scandir($dirCatalog);  // сканирование дирректории
-    $productList = array_slice($productList, 2); //  unset($imagesCatalog[0], $imagesCatalog[1]) удаление точек
-    foreach ($productList as $item) {
-        mysqli_query(getDB(), "INSERT INTO `product` (`name`, `rating`) VALUES ('{$item}', '0');");
-    }
-}
+$stmt = getArrayDB('SELECT * FROM product');
+$stmt = $db->queryOne('SELECT * FROM product WHERE id = :id', ['id' => 10]);
+var_dump($stmt);
+
+
+die;
 */

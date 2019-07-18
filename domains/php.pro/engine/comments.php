@@ -43,27 +43,34 @@ function messageComment()
 
 function addComment()
 {
-    $nameComment = mysqli_real_escape_string(getDB(), (string)htmlspecialchars(strip_tags($_POST['nameComment'])));
-    $emailComment = mysqli_real_escape_string(getDB(), (string)htmlspecialchars(strip_tags($_POST['emailComment'])));
-    $textComment = mysqli_real_escape_string(getDB(), (string)htmlspecialchars(strip_tags($_POST['textComment'])));
+    $nameComment = $_POST['nameComment'];
+    $emailComment = $_POST['emailComment'];
+    $textComment = $_POST['textComment'];
     $dateComment = date('Y') . '-' . date('m') . '-' .  date('d') . ' ' . date('H') . ':' . date('i') . ':' . date('d');
     $id_product = getIdProduct();
-    $sql = "INSERT INTO `comments` (`id_product`, `text`, `name`, `date`, `email`) VALUES ('{$id_product}','{$textComment}', '{$nameComment}', '{$dateComment}', '{$emailComment}');";
-    executeQuery($sql);
+    $params = [
+        'id_product' => $id_product,
+        'textComment' => $textComment,
+        'nameComment' => $nameComment,
+        'dateComment' => $dateComment,
+        'emailComment' => $emailComment
+    ];
+    $sql = "INSERT INTO `comments` (`id_product`, `text`, `name`, `date`, `email`) VALUES (:id_product, :textComment, :nameComment, :dateComment, :emailComment);";
+    executeQuery($sql, $params);
     header("Location: ?message=add");
 }
 
 function deleteComment()
 {
-    $id = (int)$_GET['id'];
-    executeQuery("DELETE FROM `comments` WHERE (`id` = {$id});");
+    $id = (int) $_GET['id'];
+    executeQuery("DELETE FROM `comments` WHERE (`id` = :id);", ['id' => $id]);
     header("Location: ?message=delete");
 }
 
 function editComment()
 {
-    $id = (int)$_GET['id'];
-    $result = executeQuery("SELECT * FROM comments WHERE id = {$id}");
+    $id = (int) $_GET['id'];
+    $result = executeQuery("SELECT * FROM comments WHERE id = :id);", ['id' => $id]);
     $selectedComment = mysqli_fetch_assoc($result);
     return $selectedComment;
     header("Location: ?message=edit&action=edit");
@@ -71,20 +78,29 @@ function editComment()
 
 function saveComment()
 {
-    $id = (int)$_POST['id_comment'];
-    $nameComment = mysqli_real_escape_string(getDB(), (string)htmlspecialchars(strip_tags($_POST['nameComment'])));
-    $emailComment = mysqli_real_escape_string(getDB(), (string)htmlspecialchars(strip_tags($_POST['emailComment'])));
-    $textComment = mysqli_real_escape_string(getDB(), (string)htmlspecialchars(strip_tags($_POST['textComment'])));
+    $id = (int) $_POST['id_comment'];
+    $nameComment = $_POST['nameComment'];
+    $emailComment = $_POST['emailComment'];
+    $textComment = $_POST['textComment'];
     $dateComment = date('Y') . '-' . date('m') . '-' .  date('d') . ' ' . date('H') . ':' . date('i') . ':' . date('d');
-    $sql = "UPDATE `comments` SET `text` = '{$textComment}', `name` = '{$nameComment}', `date` = '{$dateComment}', `email` = '{$emailComment}' WHERE id = {$id};";
-    executeQuery($sql);
+
+    $params = [
+        'id_product' => $id,
+        'textComment' => $textComment,
+        'nameComment' => $nameComment,
+        'dateComment' => $dateComment,
+        'emailComment' => $emailComment
+    ];
+
+    $sql = "UPDATE `comments` SET `text` = :textComment, `name` = :nameComment, `date` = :dateComment, `email` = :emailComment WHERE id = :id_product;";
+    executeQuery($sql, $params);
     header("Location: ?message=save");
 }
 
 
 function getListCommentsWithID()
 {
-    return getArrayDB("SELECT * FROM `comments` WHERE id_product =" . getIdProduct());
+    return getArrayDB("SELECT * FROM `comments` WHERE id_product = :id_product",  ['id_product' => getIdProduct()]);
 }
 
 function getListComments()

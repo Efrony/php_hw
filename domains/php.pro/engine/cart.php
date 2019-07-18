@@ -3,8 +3,8 @@
 function countCart()
 {
     $session = session_id();
-    $sqlSumm = "SELECT * FROM `cart` WHERE id_session = '{$session}';";
-    $cartList = getArrayDB($sqlSumm);
+    $sqlSumm = "SELECT * FROM `cart` WHERE id_session = :id_session;";
+    $cartList = getArrayDB($sqlSumm, ['id_session' => $session]);
     return count($cartList);
 }
 
@@ -25,7 +25,11 @@ function addToCart()
     $data = json_decode(file_get_contents('php://input'));
     $id_product = $data->id_product;
 
-    executeQuery("INSERT INTO `cart` (`id_session`, `id_product`, `quantity`) VALUES ('{$session}', '{$id_product}', '1');");
+    executeQuery("INSERT INTO `cart` (`id_session`, `id_product`, `quantity`) VALUES (:id_session, :id_product, '1');",[
+        'id_session' => $session,
+        'id_product' => $id_product
+    ]);
+
     $response = [
         'countCart' => countCart(),
         'summCart' => summCart()
@@ -41,7 +45,11 @@ function deleteToCart()
     $data = json_decode(file_get_contents('php://input'));
     $id_cart_item = $data->id_cart_item;
 
-    executeQuery("DELETE FROM `cart` WHERE `id` = '{$id_cart_item}' AND id_session = '{$session}';");
+    executeQuery("DELETE FROM `cart` WHERE `id` = :id_cart_item AND id_session = :id_session;", [
+        'id_session' => $session,
+        'id_cart_item' => $id_cart_item
+    ]);
+
 
     $response = [
         'id_deleted' => $id_cart_item,
@@ -59,5 +67,5 @@ function getCartList()
     return getArrayDB("SELECT 
             cart.id AS id_cart_item, id_session, product.id AS id_product, color, price, quantity, `name`, `img_id`
             FROM cart inner join product on cart.id_product = product.id
-            AND id_session = '{$session}';");
+            AND id_session = :id_session;", ['id_session' => $session]);
 }
