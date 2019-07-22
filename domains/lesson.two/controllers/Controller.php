@@ -5,7 +5,7 @@ namespace app\controllers;
 abstract class Controller
 {
     private $action;
-    private $defaultAction = 'index';
+    private $defaultAction = 'default';
     private $layout = 'main';
     private $useLayout = true;
 
@@ -19,18 +19,14 @@ abstract class Controller
             echo 'no method';
         }
     }
-    
-    public function actionIndex()
-    {
-        echo $this->render('home');
-    }
 
     public function render($template, array $paramsContent = [])
     {
         if ($this->useLayout) {
             $layout = $this->layout;
+            $isAuth = false;
             $inLayout = $this->renderTemplates(LAYOUTS_DIR . $layout, [
-                'header' => $this->renderTemplates('header'),
+                'header' => $this->renderTemplates('header', ['isAuth' => $isAuth]),
                 'menu' => $this->renderTemplates('menu'),
                 'content' => $this->renderTemplates($template, $paramsContent),
                 'footer' => $this->renderTemplates('footer'),

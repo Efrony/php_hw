@@ -10,7 +10,7 @@
             <p class="heading">WELCOME</p>
         </div>
     </section>
-    <?php if (isAuth()) : ?>
+    <?php if ($isAuth) : ?>
         <section>Добро Пожаловать!</section>
     <?php else : ?>
         <section>

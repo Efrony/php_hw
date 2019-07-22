@@ -33,7 +33,6 @@ function showMore()
 
     header("Content-type: text/html; charset=utf-8;");
     echo renderTemplates('catalog', ['productList' => $newProducts]);
-    
 }
 
 

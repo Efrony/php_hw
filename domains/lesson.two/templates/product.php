@@ -20,17 +20,17 @@
 <main class="product_page">
     <div class="bcgBlock"></div>
     <div class="content">
-        <div class="contentBcg"><img src="/<?= DIR_CATALOG .  $productItem['img_id'] . '.jpg' ?>" alt="fotoProduct">
-            <i class="fa fa-eye" aria-hidden="true"></i><span class="raring"> <?=$productItem['rating']?></span>
+        <div class="contentBcg"><img src="/<?= DIR_CATALOG .  $productItem->img_id . '.jpg' ?>" alt="fotoProduct">
+            <i class="fa fa-eye" aria-hidden="true"></i><span class="raring"> <?=$productItem->rating?></span>
             <i class="fas fa-comment"></i><span class="raring"> <?= count($commentsList); ?></span>
             <aside>
                 <p class="collection">WOMEN COLLECTION</p> <img src="img/hot_deals/line-border-pink.png" alt="">
                 <p class="heading">Moschino Cheap And Chic</p>
-                <p class="discr"> <?= $productItem['discription'] ?></p>
+                <p class="discr"> <?= $productItem->discription?></p>
                 <p class="material"> <span>MATERIAL: </span> COTTON &emsp;&emsp;&emsp; <span>DESIGNER:
                     </span>
                     BINBURHAN </p>
-                <p class="price">$<?= $productItem['price'] ?></p>
+                <p class="price">$<?= $productItem->price?></p>
                 <form action="#">
                     <div class="characteristic">
                         <div class="color">
@@ -59,7 +59,7 @@
                             <input type="text" value="2" name="quantitys">
                         </div>
                     </div>
-                    <button type="button" class="addToCart" data-id="<?=$productItem['id']?>">&ensp;Add to Cart</button>
+                    <button type="button" class="addToCart" data-id="<?=$productItem->id?>">&ensp;Add to Cart</button>
                 </form>
             </aside>
         </div>
@@ -100,22 +100,7 @@
         </section>
         <div class="likeAlso">you may like also</div>
         <div class="product" id="product">
-            <?php foreach ($productList as $itemProduct) : ?>
-                <a href="/product/?id=<?= $itemProduct['id'] ?>">
-                    <figure class="productItem">
-                        <img src="/<?= (DIR_CATALOG . $itemProduct['id']) . '.jpg'; ?>" alt="productFoto">
-                        <div class="shadowHover">
-                            <button class="addToCart">&ensp;Add to Cart</button>
-                        </div>
-                        <figcaption><?= $itemProduct['name']; ?>
-                            <p>product_price</p>
-                            <i class="fa fa-eye" aria-hidden="true"></i><span class="raring"> <?= $itemProduct['rating'] ?></span>
-                        </figcaption>
-                    </figure>
-                </a>
-                <?php $i += 1;
-                if ($i > 3) break; ?>
-            <?php endforeach; ?>
+            <?=$catalog ?>
         </div>
     </div>
 </main>

@@ -19,7 +19,7 @@ class Db
         'opt' => [
             \PDO::ATTR_ERRMODE            => \PDO::ERRMODE_EXCEPTION,
             \PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_ASSOC, // fetch(PDO::FETCH_ASSOC)) fetch(PDO::FETCH_LAZY))
-            \PDO::ATTR_EMULATE_PREPARES   => false,
+            // \PDO::ATTR_EMULATE_PREPARES   => false,
         ]
     ];
 
@@ -68,4 +68,16 @@ class Db
     {
         return $this->queryAll($sql, $params)[0];
     }
+
+    public function queryObject($sql, $params, $class)
+    {
+        $stmt = $this->query($sql, $params);
+        $stmt->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, $class);
+        return $stmt->fetch();
+    }
+
+    public function lastInsertId() {
+        return $this->connection->lastInsertId();
+    }
+
 }
