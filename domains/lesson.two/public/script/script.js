@@ -1,4 +1,9 @@
 window.onload = function () {
+    fromProduct = 20
+    countProduct = 20
+    $showMoreButton = document.getElementById('showMore')
+    $showMoreButton.addEventListener('click', showMore)
+
     $addToCartButtons = document.getElementsByClassName('addToCart')
     for (var i = 0; i < $addToCartButtons.length; i++) {
         $addToCartButtons[i].addEventListener('click', addToCart)
@@ -7,13 +12,9 @@ window.onload = function () {
     for (var i = 0; i < $deleteToCartButtons.length; i++) {
         $deleteToCartButtons[i].addEventListener('click', deleteToCart)
     }
-    $registrationButton = document.getElementById('registrationButton')
-    $registrationButton.addEventListener('click', registration)
+    //$registrationButton = document.getElementById('registrationButton')
+    //$registrationButton.addEventListener('click', registration)
 
-    fromProduct = 20
-    countProduct = 20
-    $showMoreButton = document.getElementById('showMore')
-    $showMoreButton.addEventListener('click', showMore)
 }
 
 function showMore() {

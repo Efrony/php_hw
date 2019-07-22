@@ -47,7 +47,7 @@ class Db
         return $stmt;
     }
 
-    public function execute($sql, $params = [])
+    public function executeQuery($sql, $params = [])
     {
         $this->query($sql, $params);
         return true;

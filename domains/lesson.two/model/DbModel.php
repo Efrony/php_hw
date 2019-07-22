@@ -39,7 +39,7 @@ abstract class DbModel extends Model
     }
 
 
-    public static function insert()
+    public function insert()
     {
         $params = [];
         $columns = [];
@@ -49,23 +49,42 @@ abstract class DbModel extends Model
             $params[":{$key}"] = $value;
             $columns[] = "`$key`";
         }
-        $columns = implode(',', $columns);
-        $values = implode(',', array_keys($params));
+        $columns = implode(', ', $columns);
+        $values = implode(', ', array_keys($params));
         $tableName = static::getNameTable();
 
         $sql = "INSERT INTO {$tableName} ({$columns}) VALUES ({$values})";
-        Db::getInstance()->execute($sql, $params);
+        Db::getInstance()->executeQuery($sql, $params);
 
         $this->id = Db::getInstance()->lastInsertId();
     }
 
-    public static function update()
-    { }
+    public function update()
+    {   
+        $string = '';
+        $params = [];
 
-    public static function delete()
+        foreach ($this as $key=>$value) {
+            if ($key == 'id') continue;
+            $string .= "`{$key}` = :{$key}, ";
+            $params[$key] = $value;
+        }
+        $string = substr($string, 0, -2);
+
+        $tableName = static::getNameTable();
+
+        $sql = "UPDATE {$tableName} SET {$string} WHERE (`id` = :id);";
+        $params['id'] = $this->id;
+
+
+        return Db::getInstance()->executeQuery($sql, $params);
+
+    }
+
+    public function delete()
     {
         $tableName = static::getNameTable();
         $sql = "DELETE FROM {$tableName} WHERE id = :id";
-        return Db::getInstance()->execute($sql, ['id' => $this->id]);
+        return Db::getInstance()->executeQuery($sql, ['id' => $this->id]);
     }
 }

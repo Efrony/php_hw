@@ -12,9 +12,9 @@ interface IModel
 
     public static function getAll();
 
-    public static function insert();
+    public function insert();
 
-    public static function update();
+    public function update();
 
-    public static function delete();
+    public function delete();
     }

@@ -12,7 +12,6 @@ class Products extends DbModel
     public $price;
     public $img_id;
 
-
     public function __construct(
         $id = null,
         $name = null,

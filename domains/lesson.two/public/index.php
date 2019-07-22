@@ -3,6 +3,7 @@ require "../engine/Autoload.php";
 require "../config/config.php";
 
 use app\engine\Autoload;
+use app\model\Products;
 
 spl_autoload_register([new Autoload, 'load']);
 
