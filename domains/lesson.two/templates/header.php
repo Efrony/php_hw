@@ -1,4 +1,3 @@
-
 <header>
     <div class="logoSearch">
         <div class="logo">
@@ -25,7 +24,7 @@
                     My Account
                     <i class="fas fa-caret-down"></i>
                 </a>
-                <a class="myAccountExit" href="/users/?exit=ok">Exit</a>
+                <a class="myAccountExit" href="/users/exit">Exit</a>
             </div>
         <?php else : ?>
             <div class="myAccount">

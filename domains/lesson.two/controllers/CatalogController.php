@@ -10,11 +10,9 @@ class CatalogController extends Controller
 {
     public function actionDefault()
     {
-        $limit =  0;
-
         $productList = Products::getLimit(0, 20);
         $catalog = $this->renderTemplates('catalog', ['productList' => $productList]);
-
+        
         echo $this->render('women', ['catalog' => $catalog]);
     }
 

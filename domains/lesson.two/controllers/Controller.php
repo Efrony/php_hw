@@ -2,6 +2,9 @@
 
 namespace app\controllers;
 
+use app\model\Users;
+use app\model\Cart;
+
 abstract class Controller
 {
     private $action;
@@ -16,6 +19,7 @@ abstract class Controller
         if (method_exists($this, $method)) {
             $this->$method();
         } else {
+            var_dump($method);
             echo 'no method';
         }
     }
@@ -24,9 +28,12 @@ abstract class Controller
     {
         if ($this->useLayout) {
             $layout = $this->layout;
-            $isAuth = false;
             $inLayout = $this->renderTemplates(LAYOUTS_DIR . $layout, [
-                'header' => $this->renderTemplates('header', ['isAuth' => $isAuth]),
+                'header' => $this->renderTemplates('header', [
+                    'isAuth' => Users::isAuth(),
+                    'myEmail' => Users::getUser(),
+                    'countCart' => Cart::countCart(),
+                    ]),
                 'menu' => $this->renderTemplates('menu'),
                 'content' => $this->renderTemplates($template, $paramsContent),
                 'footer' => $this->renderTemplates('footer'),

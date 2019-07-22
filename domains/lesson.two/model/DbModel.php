@@ -17,12 +17,14 @@ abstract class DbModel extends Model
         return Db::getInstance()->queryObject($sql, ['id' => $id], static::class);
     }
 
+
     public static function getAll()
     {
         $tableName = static::getNameTable();
         $sql = "SELECT * FROM {$tableName}";
         return Db::getInstance()->queryAll($sql);
     }
+
 
     public static function getLimit(int $from, int $to)
     {
@@ -31,11 +33,25 @@ abstract class DbModel extends Model
         return Db::getInstance()->queryAll($sql);
     }
 
+
     public static function getWhere($condition, $point)
     {
         $tableName = static::getNameTable();
         $sql = "SELECT * FROM {$tableName}  WHERE {$condition} = :point";
-        return Db::getInstance()->queryAll($sql, ['point' => $point]);
+        $data = Db::getInstance()->queryAll($sql, ['point' => $point]);
+        if (count($data) == 1) {
+            return $data[0];
+        }
+        return $data;
+    }
+
+
+    public static function getObjectWhere($condition, $point)
+    {
+        $tableName = static::getNameTable();
+        $sql = "SELECT * FROM {$tableName}  WHERE {$condition} = :point";
+        $data = Db::getInstance()->queryObject($sql, ['point'=> $point], static::class);
+        return $data;
     }
 
 
@@ -59,6 +75,7 @@ abstract class DbModel extends Model
         $this->id = Db::getInstance()->lastInsertId();
     }
 
+
     public function update()
     {   
         $string = '';
@@ -70,21 +87,18 @@ abstract class DbModel extends Model
             $params[$key] = $value;
         }
         $string = substr($string, 0, -2);
-
         $tableName = static::getNameTable();
-
         $sql = "UPDATE {$tableName} SET {$string} WHERE (`id` = :id);";
         $params['id'] = $this->id;
 
-
         return Db::getInstance()->executeQuery($sql, $params);
-
     }
 
-    public function delete()
+
+    public function delete($id)
     {
         $tableName = static::getNameTable();
         $sql = "DELETE FROM {$tableName} WHERE id = :id";
-        return Db::getInstance()->executeQuery($sql, ['id' => $this->id]);
+        return Db::getInstance()->executeQuery($sql, ['id' => $id]);
     }
 }

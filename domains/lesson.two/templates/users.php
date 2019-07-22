@@ -32,7 +32,7 @@
                 <p id="messageRegistr"></p>
                 <input type="submit" name="register" id ="registrationButton" value="register">
             </form>
-            <form method='post' id="login" class="data-2" name="loginForm" >
+            <form action="/users/login/" method='post' id="login" class="data-2" name="loginForm" >
                 <h5>sign in</h5>
                 <p class="point">Already registed?</p>
                 <p class="about">Please log in below</p>

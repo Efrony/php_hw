@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 require "../engine/Autoload.php";
 require "../config/config.php";
 
@@ -13,7 +15,6 @@ $controllerName = $url_array[1] ?  : 'index'; // если null то вернет
 $actionName = $url_array[2];
 
 $controllerClass = CONTROLLER_NAMESPACE . ucfirst($controllerName) . "Controller";
-
 if (class_exists($controllerClass)) {
     $controller = new $controllerClass();
     $controller->runAction($actionName);
