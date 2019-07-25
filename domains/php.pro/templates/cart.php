@@ -45,14 +45,14 @@
                 <a href="#">
                     <div class="clearCart">cLEAR SHOPPING CART</div>
                 </a>
-                <a href="man.html">
+                <a href="/catalog/">
                     <div class="continueCart">cONTINUE sHOPPING</div>
                 </a>
             </div>
         </div>
-        <div class="inputBlock">
+        <form action="/cart/sendOrder" method='post' class="inputBlock">
             <div class="shippingAdress"><span>Shipping Adress</span>
-                <form action="#">
+                <div class="column">
                     <input type="text" id="country" list="countrys" name="country" placeholder="Bangladesh">
                     <datalist id="countrys">
                         <option value="Russia">Russia</option>
@@ -62,15 +62,18 @@
                         <option value="France">France</option>
                     </datalist>
                     <input type="text" placeholder="City" id="state" name="state">
-                    <input type="text" id="zip" name="zip" placeholder="Street"> </form>
-                <input type="submit" value="Map">
+                    <input type="text" id="zip" name="zip" placeholder="Street">
+                    <input class="columnButton" type="submit" onclick="return false" value="Map">
+                </div>
+
             </div>
             <div class="couponDiscount"><span>personal data</span>
                 <p>Enter your name and phone</p>
-                <form action="#">
-                    <input type="text" placeholder="Name" id="state1" name="state">
-                    <input type="text" placeholder="Phone" id="state1" name="state">
-                    <input type="submit" value="Apply coupon"> </form>
+                <div class="column">
+                    <input type="text" placeholder="Name" id="state1" name="name">
+                    <input type="text" placeholder="Phone" id="state1" name="phone">
+                    <input class="columnButton" type="submit" onclick="return false" value="Apply coupon">
+                </div>
             </div>
             <div class="grandTotal">
                 <div class="price" id="priceTotal">
@@ -80,8 +83,10 @@
                         </span>
                     </p>
                 </div>
-                <a href="#">SEND ORDER</a>
+                <br>
+                <p id="messageLogin" class="invalidForm"><?=$_GET['phonemessage']?></p>
+                <input id="sendOrder" type="submit" value="SEND ORDER" name="sendOrder">
             </div>
-        </div>
+        </form>
     </main>
 <?php endif ?>

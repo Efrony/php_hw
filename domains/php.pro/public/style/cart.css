@@ -133,21 +133,21 @@
   display: flex;
   flex-direction: column;
 }
-.inputBlock .shippingAdress input[type="submit"],
-.inputBlock .couponDiscount input[type="submit"] {
+.inputBlock .shippingAdress .columnButton,
+.inputBlock .couponDiscount .columnButton {
   color: #4a4a4a;
   font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
   align-self: baseline;
 }
-.inputBlock .shippingAdress input[type="submit"]:hover,
-.inputBlock .couponDiscount input[type="submit"]:hover {
+.inputBlock .shippingAdress .columnButton:hover,
+.inputBlock .couponDiscount .columnButton:hover {
   background-color: #f16d7f;
   color: #fff;
 }
-.inputBlock .shippingAdress form,
-.inputBlock .couponDiscount form {
+.inputBlock .shippingAdress .column,
+.inputBlock .couponDiscount .column {
   display: flex;
   flex-direction: column;
 }
@@ -200,7 +200,7 @@
   text-transform: uppercase;
   color: #f16d7f;
 }
-.inputBlock .grandTotal a {
+.inputBlock .grandTotal #sendOrder {
   display: block;
   text-decoration: none;
   width: 100%;
@@ -211,4 +211,13 @@
   font-weight: 700;
   text-transform: uppercase;
   text-align: center;
+  cursor: pointer;
+}
+.inputBlock .grandTotal #sendOrder:hover {
+  color: #f16d7f;
+  background-color: #fff;
+  outline: 1px solid #f16d7f;
+}
+.invalidForm {
+  color: red;
 }
