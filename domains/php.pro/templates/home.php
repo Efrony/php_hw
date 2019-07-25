@@ -13,5 +13,5 @@
     }
 </style>
 <main class="home_page">
-
+ HOME PAGE
 </main>

@@ -74,7 +74,6 @@
             </div>
             <div class="grandTotal">
                 <div class="price" id="priceTotal">
-                    Sub total &nbsp;&nbsp;&nbsp;&nbsp; $<span id="summAllCart"> <?= $summCart ?></span>
                     <p>GRAND TOTAL $
                         <span id="grandTotal">
                             &nbsp;&nbsp;&nbsp; <?= $summCart ?>

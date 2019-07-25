@@ -1,7 +1,13 @@
 <?php
 
+namespace app\engine;
+
+use app\traits\Tsingletone;
+
 class Db
 {
+    use Tsingletone;
+    
     private $connection = null;
     private $config = [
         'driver' => 'mysql',
@@ -11,9 +17,9 @@ class Db
         'charset' => 'utf8',
         'database' => 'shop',
         'opt' => [
-            PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
-            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC, // fetch(PDO::FETCH_ASSOC)) fetch(PDO::FETCH_LAZY))
-            PDO::ATTR_EMULATE_PREPARES   => false,
+            \PDO::ATTR_ERRMODE            => \PDO::ERRMODE_EXCEPTION,
+            \PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_ASSOC, // fetch(PDO::FETCH_ASSOC)) fetch(PDO::FETCH_LAZY))
+            // \PDO::ATTR_EMULATE_PREPARES   => false,
         ]
     ];
 
@@ -35,7 +41,7 @@ class Db
             $pass = $this->config['password'];
             $opt = $this->config['opt'];
 
-            $this->connection = new PDO($dsn, $user, $pass, $opt);
+            $this->connection = new \PDO($dsn, $user, $pass, $opt);
         }
         return $this->connection;
     }
@@ -62,42 +68,17 @@ class Db
     {
         return $this->queryAll($sql, $params)[0];
     }
-}
 
-
-
-function getDB()
-{
-    static $db = null;
-    if (is_null($db)) {
-        $db = new Db;
+    public function queryObject($sql, $params, $class)
+    {
+        $stmt = $this->query($sql, $params);
+        $stmt->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, $class);
+        return $stmt->fetch();
     }
-    return $db;
+    
+
+    public function lastInsertId() {
+        return $this->connection->lastInsertId();
+    }
+
 }
-
-function executeQuery($sql, $params = [])
-{
-    $stmt = getDB();
-    return $stmt->execute($sql, $params);
-}
-
-function getArrayDB($sql, $params = [])
-{
-    $stmt = getDB();
-    return $stmt->queryAll($sql, $params);
-}
-
-function getOneDB($sql, $params = [])
-{
-    $stmt = getDB();
-    return $stmt->queryOne($sql, $params);
-}
-
-/*
-$stmt = getArrayDB('SELECT * FROM product');
-$stmt = $db->queryOne('SELECT * FROM product WHERE id = :id', ['id' => 10]);
-var_dump($stmt);
-
-
-die;
-*/

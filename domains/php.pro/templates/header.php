@@ -1,4 +1,3 @@
-
 <header>
     <div class="logoSearch">
         <div class="logo">
@@ -13,23 +12,23 @@
     </div>
     <div class="my">
 
-            <a class="authEmail" href="/my_account/"><?= $myEmail ?></a>
+            <a class="authEmail" href="/users/"><?= $myEmail ?></a>
 
         <a class="cartButton" href="/cart/">
             <img src="/img/Forma_1.png" alt="basket">
             <div class="cartCount" id="cartCount"><?= $countCart ?></div>
         </a>
-        <?php if (isAuth()) : ?>
+        <?php if ($isAuth): ?>
             <div class="myAccount">
-                <a href="/my_account/">
+                <a href="/users/">
                     My Account
                     <i class="fas fa-caret-down"></i>
                 </a>
-                <a class="myAccountExit" href="/my_account/?exit=ok">Exit</a>
+                <a class="myAccountExit" href="/users/exit">Exit</a>
             </div>
         <?php else : ?>
             <div class="myAccount">
-                <a href="/my_account/">Sign in / Registration</a>
+                <a href="/users/">Sign in / Registration</a>
             </div>
         <?php endif ?>
     </div>

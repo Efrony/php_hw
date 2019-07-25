@@ -7,7 +7,6 @@
     }
 </style>
 <main class="women_page">
-    women
     <div class="product" id="catalogField">
         <?=$catalog?>
     </div>

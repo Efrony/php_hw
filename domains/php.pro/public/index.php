@@ -1,16 +1,22 @@
 <?php
-include('../config/config.php');
+session_start();
+
+require "../engine/Autoload.php";
+require "../config/config.php";
+
+use app\engine\Autoload;
+
+spl_autoload_register([new Autoload, 'load']);
+
 $url_array = explode("/", $_SERVER['REQUEST_URI']);
 
-if ($url_array[1] == '') {
-    $page = 'home';
+$controllerName = $url_array[1] ?: 'index'; // если null то вернет product, если не null, то вернет $_GET['c'] 
+$actionName = $url_array[2];
+
+$controllerClass = CONTROLLER_NAMESPACE . ucfirst($controllerName) . "Controller";
+if (class_exists($controllerClass)) {
+    $controller = new $controllerClass();
+    $controller->runAction($actionName);
 } else {
-    $page = $url_array[1];
+    echo 'no controller';
 }
-
-
-// generateDB(DIR_CATALOG); 
-
-$paramsTemplate = getParamsTemplate($page);
-
-echo renderLayout($page, $paramsTemplate);

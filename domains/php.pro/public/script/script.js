@@ -1,23 +1,37 @@
 window.onload = function () {
-    $addToCartButtons = document.getElementsByClassName('addToCart')
-    for (var i = 0; i < $addToCartButtons.length; i++) {
-        $addToCartButtons[i].addEventListener('click', addToCart)
-    }
-    $deleteToCartButtons = document.getElementsByClassName('deleteButton')
-    for (var i = 0; i < $deleteToCartButtons.length; i++) {
-        $deleteToCartButtons[i].addEventListener('click', deleteToCart)
-    }
-    //$registrationButton = document.getElementById('registrationButton')
-    // $registrationButton.addEventListener('click', registration)
+    const page = window.location.pathname
+    console.log(page)
+    if (page == '/cart/') {
+        $deleteToCartButtons = document.getElementsByClassName('deleteButton')
+        for (let i = 0; i < $deleteToCartButtons.length; i++) {
+            $deleteToCartButtons[i].addEventListener('click', deleteToCart)
+        }
+    } else if (page == '/catalog/') {
+        fromProduct = 20
+        countProduct = 20
+        $showMoreButton = document.getElementById('showMore')
+        $showMoreButton.addEventListener('click', showMore)
 
-    fromProduct = 24
-    countProduct = 24
-    $showMoreButton = document.getElementById('showMore')
-    $showMoreButton.addEventListener('click', showMore)
+        $addToCartButtons = document.getElementsByClassName('addToCart')
+        for (let i = 0; i < $addToCartButtons.length; i++) {
+            $addToCartButtons[i].addEventListener('click', addToCart)
+        }
+    } else if (page == '/catalog/product/') {
+        $addToCartButtons = document.getElementsByClassName('addToCart')
+        for (let i = 0; i < $addToCartButtons.length; i++) {
+            $addToCartButtons[i].addEventListener('click', addToCart)
+        }
+    }
+     else if (page == '/users/') {
+        if (document.getElementById('registrationButton')) {
+            $registrationButton = document.getElementById('registrationButton')
+            $registrationButton.addEventListener('click', registration)
+        }
+    }
 }
 
 function showMore() {
-    fetch('/api/?action=showMore', {
+    fetch('/api/showmore', {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json'
@@ -33,14 +47,13 @@ function showMore() {
         .then(text => {
             catalogField = document.getElementById('catalogField')
             catalogField.innerHTML += text
-
             fromProduct += countProduct
         })
 }
 
 function addToCart(event) {
     id_product = event.target.dataset.id
-    fetch('/api/?action=addToCart', {
+    fetch('/api/addtocart', {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json'
@@ -52,14 +65,12 @@ function addToCart(event) {
         .then(response => response.json())
         .then(res => {
             document.getElementById('cartCount').innerHTML = res['countCart']
-            document.getElementById('summAllCart').innerHTML = res['summCart']
-            document.getElementById('grandTotal').innerHTML = res['summCart']
         })
 }
 
 function deleteToCart(event) {
     id_cart_item = event.target.dataset.id
-    fetch('/api/?action=deleteToCart', {
+    fetch('/api/deletetocart', {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json'
@@ -74,8 +85,6 @@ function deleteToCart(event) {
             deleted_item = document.getElementById(cart_number)
             deleted_item.remove()
             document.getElementById('cartCount').innerHTML = res['countCart']
-
-            document.getElementById('summAllCart').innerHTML = res['summCart']
             document.getElementById('grandTotal').innerHTML = res['summCart']
         })
 }
