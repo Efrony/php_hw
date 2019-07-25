@@ -28,7 +28,7 @@ class Cart extends DbModel
     public static function countCart()
     {
         $id_session = session_id();
-        $cartList = Cart::getWhere('id_session', $id_session);
+        $cartList = Cart::getArrayWhere('id_session', $id_session);
         return count($cartList);
     }
 

@@ -1,21 +1,33 @@
 window.onload = function () {
-    $deleteToCartButtons = document.getElementsByClassName('deleteButton')
-    for (var i = 0; i < $deleteToCartButtons.length; i++) {
-        $deleteToCartButtons[i].addEventListener('click', deleteToCart)
+    const page = window.location.pathname
+    console.log(page)
+    if (page == '/cart/') {
+        $deleteToCartButtons = document.getElementsByClassName('deleteButton')
+        for (let i = 0; i < $deleteToCartButtons.length; i++) {
+            $deleteToCartButtons[i].addEventListener('click', deleteToCart)
+        }
+    } else if (page == '/catalog/') {
+        fromProduct = 20
+        countProduct = 20
+        $showMoreButton = document.getElementById('showMore')
+        $showMoreButton.addEventListener('click', showMore)
+
+        $addToCartButtons = document.getElementsByClassName('addToCart')
+        for (let i = 0; i < $addToCartButtons.length; i++) {
+            $addToCartButtons[i].addEventListener('click', addToCart)
+        }
+    } else if (page == '/catalog/product/') {
+        $addToCartButtons = document.getElementsByClassName('addToCart')
+        for (let i = 0; i < $addToCartButtons.length; i++) {
+            $addToCartButtons[i].addEventListener('click', addToCart)
+        }
     }
-
-    fromProduct = 20
-    countProduct = 20
-    $showMoreButton = document.getElementById('showMore')
-    $showMoreButton.addEventListener('click', showMore)
-
-    $addToCartButtons = document.getElementsByClassName('addToCart')
-    for (var i = 0; i < $addToCartButtons.length; i++) {
-        $addToCartButtons[i].addEventListener('click', addToCart)
+     else if (page == '/users/') {
+        if (document.getElementById('registrationButton')) {
+            $registrationButton = document.getElementById('registrationButton')
+            $registrationButton.addEventListener('click', registration)
+        }
     }
-    $registrationButton = document.getElementById('registrationButton')
-    $registrationButton.addEventListener('click', registration)
-
 }
 
 function showMore() {
@@ -53,8 +65,6 @@ function addToCart(event) {
         .then(response => response.json())
         .then(res => {
             document.getElementById('cartCount').innerHTML = res['countCart']
-            document.getElementById('summAllCart').innerHTML = res['summCart']
-            document.getElementById('grandTotal').innerHTML = res['summCart']
         })
 }
 
@@ -75,7 +85,6 @@ function deleteToCart(event) {
             deleted_item = document.getElementById(cart_number)
             deleted_item.remove()
             document.getElementById('cartCount').innerHTML = res['countCart']
-            document.getElementById('summAllCart').innerHTML = res['summCart']
             document.getElementById('grandTotal').innerHTML = res['summCart']
         })
 }

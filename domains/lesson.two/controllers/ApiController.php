@@ -25,7 +25,6 @@ class ApiController extends Controller
         $data = json_decode(file_get_contents('php://input'));
         $id_product = $data->id_product;
         (new Cart($session, $id_product))->insert();
-
         $response = [
             'countCart' => Cart::countCart(),
             'summCart' => Cart::summCart()

@@ -45,6 +45,13 @@ abstract class DbModel extends Model
         return $data;
     }
 
+    public static function getArrayWhere($condition, $point)
+    {
+        $tableName = static::getNameTable();
+        $sql = "SELECT * FROM {$tableName}  WHERE {$condition} = :point";
+        $data = Db::getInstance()->queryAll($sql, ['point' => $point]);
+        return $data;
+    }
 
     public static function getObjectWhere($condition, $point)
     {

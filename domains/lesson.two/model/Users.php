@@ -1,7 +1,6 @@
 <?php
 
 namespace app\model;
-use app\model\Cart;
 
 class Users extends DbModel
 {
@@ -12,7 +11,7 @@ class Users extends DbModel
 
     public static function getUser()
     {
-        return Users::isAuth() ? $_SESSION["login"] : "Guest";
+        return Users::isAuth() ? $_SESSION["email"] : "Guest";
     }
 
     public static function isAuth() //проверка авторизации 
@@ -22,24 +21,23 @@ class Users extends DbModel
             $row = Users::getWhere('hash', $hash);
             $user = $row['email'];
             if (!empty($user)) {
-                $_SESSION['login'] = $user;
+                $_SESSION['email'] = $user;
             }
         }
-        return isset($_SESSION['login']) ? true : false;
+        return isset($_SESSION['email']) ? true : false;
     }
 
     public static function isCompliance($login, $pass)
     {
         $row = Users::getWhere('email', $login);
         if (password_verify($pass, $row['password'])) {
-            $_SESSION['login'] = $login;
-            $_SESSION['id'] = $row['id'];
-            Users::onceSaveCartID($row);
+            $_SESSION['email'] = $login;
+            //Users::onceSaveCartID($row);
             return true;
         }
         return false;
     }
-    
+
     private static function onceSaveCartID($row)
     {
         $login = $row['email'];
@@ -48,11 +46,15 @@ class Users extends DbModel
         if (empty($id_cart)) {
             $user = Users::getObjectWhere('email', $login);
             $user->id_cart_session = $cookie;
-            $user->update(); 
+            $user->update();
         } else {
-            session_destroy();
-            setcookie("PHPSESSID", null, time() - 100, '/');
+           // session_destroy();
+            //session_write_close();
+            //session_register_shutdown();
+           // setcookie("PHPSESSID", null, time() - 100, '/');
+           
             session_id($id_cart);
+            
         }
     }
 }
