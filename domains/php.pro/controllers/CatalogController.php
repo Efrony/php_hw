@@ -20,6 +20,9 @@ class CatalogController extends Controller
     {
         $id = $_GET['id'];
         $productItem = Products::getOne($id);
+        $productItem->rating++;
+        $productItem->update();
+        
         $productList = Products::getLimit(0, 4);
         $commentsList = Comments::getWhere('id_product', $id);
         $catalog = $this->renderTemplates('catalog', ['productList' => $productList]);

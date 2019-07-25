@@ -14,7 +14,7 @@
         <section>Добро Пожаловать!</section>
     <?php else : ?>
         <section>
-            <form method="post" onclick="return false" name="registr" id="registr" class="data-1">
+            <form action="/users/registration/" method="post" onclick="return false" name="registr" id="registr" class="data-1">
                 <h5>register</h5>
                 <p class="point">register and save time!</p>
                 <p class="about">Register with us for future convenience</p>

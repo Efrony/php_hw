@@ -19,7 +19,7 @@ class UsersController extends Controller
 
         if (!Users::isCompliance($login, $pass)) {  // если не соответствует логин и пароль
             $message = 'Не верный логин или пароль';
-            header("Location: /users/default/?loginmessage={$message}"); 
+            header("Location: /users/default/?loginmessage={$message}");
             die;
         } else {
             if ($_POST['remember'] == 'yes') { // если нажата кнопка Запомнить 

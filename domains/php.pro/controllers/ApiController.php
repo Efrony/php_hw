@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\model\Products;
 use app\model\Cart;
+use app\model\Users;
 
 class ApiController extends Controller
 {
@@ -44,6 +45,31 @@ class ApiController extends Controller
             'id_deleted' => $id_cart_item,
             'countCart' => Cart::countCart(),
             'summCart' => Cart::summCart()
+        ];
+        header("Content-type: application/json");
+        echo json_encode($response);
+    }
+
+    public function actionRegistration()
+    {
+        $data = json_decode(file_get_contents('php://input'));
+        $name = $data->name;
+        $email = $data->email;
+        $password = $data->password;
+        $phone = $data->phone;
+        if (Users::isRegistred($email)) {
+            $message = 'Такой e-mail уже зарегистрирован';
+            $classValid =  'invalidForm ';
+        } else {
+            $hash = password_hash($password, PASSWORD_DEFAULT);
+            (new Users($name, $email, $hash, $phone))->insert();
+
+            $message = 'Регистрация прошла успешно';
+            $classValid =  'validForm';
+        }
+        $response = [
+            'message' => $message,
+            'classValid' => $classValid,
         ];
         header("Content-type: application/json");
         echo json_encode($response);

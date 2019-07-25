@@ -96,7 +96,7 @@ function registration() {
     $email = $registrForm.email.value
     $password = $registrForm.password.value
     $phone = $registrForm.phone.value
-    fetch('/api/?action=registration', {
+    fetch('/api/registration', {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json'
