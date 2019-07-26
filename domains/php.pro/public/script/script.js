@@ -6,7 +6,7 @@ window.onload = function () {
         for (let i = 0; i < $deleteToCartButtons.length; i++) {
             $deleteToCartButtons[i].addEventListener('click', deleteToCart)
         }
-        if (document.getElementById('clearCart')){
+        if (document.getElementById('clearCart')) {
             $clearCart = document.getElementById('clearCart')
             $clearCart.addEventListener('click', clearCart)
         }
@@ -25,8 +25,7 @@ window.onload = function () {
         for (let i = 0; i < $addToCartButtons.length; i++) {
             $addToCartButtons[i].addEventListener('click', addToCart)
         }
-    }
-     else if (page == '/users/') {
+    } else if (page == '/users/') {
         if (document.getElementById('registrationButton')) {
             $registrationButton = document.getElementById('registrationButton')
             $registrationButton.addEventListener('click', registration)
@@ -52,6 +51,11 @@ function showMore() {
             catalogField = document.getElementById('catalogField')
             catalogField.innerHTML += text
             fromProduct += countProduct
+
+            $addToCartButtons = document.getElementsByClassName('addToCart')
+            for (let i = 0; i < $addToCartButtons.length; i++) {
+                $addToCartButtons[i].addEventListener('click', addToCart)
+            }
         })
 }
 
@@ -120,21 +124,21 @@ function registration() {
         })
 }
 
-function clearCart(){
+function clearCart() {
     fetch('/api/clearCart')
-    .then(response => response.json())
-    .then(res => {
-        if (res['countCart'] == 0) {
-            window.location.reload()
-            /*
-            document.getElementById('cartCount').innerHTML = 0
-            document.getElementById('grandTotal').innerHTML = 0
+        .then(response => response.json())
+        .then(res => {
+            if (res['countCart'] == 0) {
+                window.location.reload()
+                /*
+                document.getElementById('cartCount').innerHTML = 0
+                document.getElementById('grandTotal').innerHTML = 0
 
-            $deletedItems = document.getElementsByClassName('productItem')
-            for (let i = 0; i < $deletedItems.length; i++) {
-                $deletedItems[i].remove()
+                $deletedItems = document.getElementsByClassName('productItem')
+                for (let i = 0; i < $deletedItems.length; i++) {
+                    $deletedItems[i].remove()
+                }
+                */
             }
-            */
-        }
-    })
+        })
 }
