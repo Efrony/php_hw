@@ -3,6 +3,9 @@
 namespace app\controllers;
 
 use app\model\Cart;
+use app\model\Orders;
+use app\model\Users;
+use app\engine\Db;
 
 class CartController extends Controller
 {
@@ -23,14 +26,20 @@ class CartController extends Controller
                 header("Location: /cart/default/?phonemessage={$message}");
                 die;
             }
-            $country = $_POST['country'];
-            $state = $_POST['state'];
-            $zip = $_POST['zip'];
+            $email = Users::getUser();
+            $address = $_POST['country'] .' '. $_POST['state'] .' '. $_POST['zip'];
+            $session = session_id();
+            $orderProducts = Cart::getColumnWhere('id_product', 'id_session', $session);
+            $orderProducts = implode(';', $orderProducts);
             $name = $_POST['name'];
+            $summCart = Cart::summCart();
+            
+            $newOrder = new Orders($email, $address, $phone, $session, $orderProducts, $name, $summCart);
+            $newOrder->insert();
 
-            $cartList = Cart::getCart();
-            $address = `{$country} {$state} {$zip}`;
-            header("Location: /cart/");
+            Cart::clearCart();
+            $orderMessage = $newOrder->id;
+            header("Location: /cart/default/?orderMessage={$orderMessage}");
         }
     }
 }

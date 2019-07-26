@@ -74,4 +74,11 @@ class ApiController extends Controller
         header("Content-type: application/json");
         echo json_encode($response);
     }
+
+    public function actionClearCart(){
+        Cart::clearCart();
+        $response = ['countCart' => Cart::countCart()];
+        header("Content-type: application/json");
+        echo json_encode($response);
+    }
 }

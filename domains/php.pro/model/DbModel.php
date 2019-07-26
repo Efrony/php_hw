@@ -25,6 +25,11 @@ abstract class DbModel extends Model
         return Db::getInstance()->queryAll($sql);
     }
 
+    public static function getColumnWhere($column, $condition, $point) {
+        $tableName = static::getNameTable();
+        $sql = "SELECT {$column} FROM {$tableName} WHERE {$condition} = :point";
+        return Db::getInstance()->queryColumn($sql, ['point' => $point]);
+    }
 
     public static function getLimit(int $from, int $to)
     {
@@ -82,7 +87,6 @@ abstract class DbModel extends Model
         $this->id = Db::getInstance()->lastInsertId();
     }
 
-
     public function update()
     {   
         $string = '';
@@ -100,7 +104,6 @@ abstract class DbModel extends Model
 
         return Db::getInstance()->executeQuery($sql, $params);
     }
-
 
     public function delete($id)
     {

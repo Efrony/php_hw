@@ -6,6 +6,10 @@ window.onload = function () {
         for (let i = 0; i < $deleteToCartButtons.length; i++) {
             $deleteToCartButtons[i].addEventListener('click', deleteToCart)
         }
+        if (document.getElementById('clearCart')){
+            $clearCart = document.getElementById('clearCart')
+            $clearCart.addEventListener('click', clearCart)
+        }
     } else if (page == '/catalog/') {
         fromProduct = 20
         countProduct = 20
@@ -114,4 +118,23 @@ function registration() {
             $message.innerHTML = res['message']
             $message.className = res['classValid']
         })
+}
+
+function clearCart(){
+    fetch('/api/clearCart')
+    .then(response => response.json())
+    .then(res => {
+        if (res['countCart'] == 0) {
+            window.location.reload()
+            /*
+            document.getElementById('cartCount').innerHTML = 0
+            document.getElementById('grandTotal').innerHTML = 0
+
+            $deletedItems = document.getElementsByClassName('productItem')
+            for (let i = 0; i < $deletedItems.length; i++) {
+                $deletedItems[i].remove()
+            }
+            */
+        }
+    })
 }

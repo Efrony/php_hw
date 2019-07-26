@@ -2,7 +2,11 @@
     <div class="newArrivalsBlock">
 
         <div class="newArrivals">
-            <p>the cart is empty...</p>
+            <?php if (isset($_GET['orderMessage'])) : ?>
+                <p>Ваш заказ оформлен! Номер заказа №<?=$_GET['orderMessage']?></p>
+            <?php else : ?>
+                <p>the cart is empty...</p>
+            <?php endif ?>
             <nav>add <span>product</span> to cart</nav>
         </div>
     </div>
@@ -42,8 +46,8 @@
                 </div>
             </div>
             <div class="buttonCart">
-                <a href="#">
-                    <div class="clearCart">cLEAR SHOPPING CART</div>
+                <a href="#" onclick="return false">
+                    <div id="clearCart" class="clearCart">cLEAR SHOPPING CART</div>
                 </a>
                 <a href="/catalog/">
                     <div class="continueCart">cONTINUE sHOPPING</div>
@@ -84,7 +88,7 @@
                     </p>
                 </div>
                 <br>
-                <p id="messageLogin" class="invalidForm"><?=$_GET['phonemessage']?></p>
+                <p id="messageLogin" class="invalidForm"><?= $_GET['phonemessage'] ?></p>
                 <input id="sendOrder" type="submit" value="SEND ORDER" name="sendOrder">
             </div>
         </form>

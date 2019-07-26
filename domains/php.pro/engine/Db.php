@@ -75,8 +75,12 @@ class Db
         $stmt->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, $class);
         return $stmt->fetch();
     }
-    
 
+    public function queryColumn($sql, $params)
+    {
+        return $this->query($sql, $params)->fetchAll(\PDO::FETCH_COLUMN);
+    }
+    
     public function lastInsertId() {
         return $this->connection->lastInsertId();
     }

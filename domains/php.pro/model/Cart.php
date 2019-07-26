@@ -41,7 +41,13 @@ class Cart extends DbModel
         }
         return $summCart;
     }
-
+    
+    public static function clearCart() {
+        $cartList = Cart::getColumnWhere('id', 'id_session', session_id());
+        foreach($cartList as $value){
+            Cart::delete($value);
+        }
+    }
 
     public static function getNameTable()
     {
