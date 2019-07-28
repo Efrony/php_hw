@@ -34,7 +34,7 @@ abstract class Controller
                     'myEmail' => Users::getUser(),
                     'countCart' => Cart::countCart(),
                     ]),
-                'menu' => $this->renderTemplates('menu'),
+                'menu' => $this->renderTemplates('menu', ['myEmail' => Users::getUser()]),
                 'content' => $this->renderTemplates($template, $paramsContent),
                 'footer' => $this->renderTemplates('footer'),
             ]);

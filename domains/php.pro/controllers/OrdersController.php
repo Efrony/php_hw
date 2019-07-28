@@ -12,7 +12,7 @@ class OrdersController extends Controller
 {
     public function actionDefault()
     {
-        $ordersList = Orders::getAll();
+        $ordersList = Orders::getArrayWhere('id_session', session_id());
         echo $this->render('orders', ['ordersList' => $ordersList]);
     }
 
