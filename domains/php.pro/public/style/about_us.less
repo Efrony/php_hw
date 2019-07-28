@@ -40,6 +40,7 @@
     }
 }
 
+
 .comments {
     padding: 50px 50px 50px;
     display: flex;
@@ -50,62 +51,73 @@
     @media (max-width: 1142px) {
         padding: 10px;
     }
+    .infoOrder {
+        display: flex;
+        justify-content: space-between;
 
-    .comment {
-        margin-top: 20px;
-        background: url(../img/foto_comment.png) no-repeat;
-        padding: 10px 70px 30px 111px;
-        color: #222224;
-        font-size: 16px;
-        font-style: italic;
-        line-height: 26px;
-        letter-spacing: 0.4px;
-        width: 100%;
-
-        address {
-            color: #f16d7f;
-            font-size: 16px;
-            font-weight: 700;
-            letter-spacing: 0.4px;
-            line-height: 26px;
-            font-style: normal;
-
-            p {
-                color: #222224;
-                font-size: 12px;
-                font-weight: 300;
-                letter-spacing: 0.3px;
-                line-height: 14px;
-            }
-        }
-        .buttons {
-            display: flex;
-            justify-content: space-around;
-            
-        }
-
-        button,
-        a {
-            padding: 0px 20px;
-            text-decoration: none !important;
-            display: block;
-            color: @pink-color;
-            font-size: 16px;
-            font-weight: bold;
-            border-radius: 3px;
-            border: 1px solid @pink-color;
-            padding: 5px 25px;
-            margin-right: 10px;
-            line-height: 20px;
-            font-style: normal;
-            cursor: pointer;
-        
-            &:hover {
-                background-color: @pink-color;
-                color: #fff;
-            }
+        div {
+            margin-right: 15px;
         }
     }
+
+    .comment {
+             margin-top: 20px;
+             background: url(../img/foto_comment.png) no-repeat;
+             padding: 10px 70px 30px 111px;
+             color: #222224;
+             font-size: 16px;
+             font-style: italic;
+             line-height: 26px;
+             letter-spacing: 0.4px;
+             width: 100%;
+
+             address {
+                 color: #f16d7f;
+                 font-size: 16px;
+                 font-weight: 700;
+                 letter-spacing: 0.4px;
+                 line-height: 26px;
+                 font-style: normal;
+
+                 p {
+                     color: #222224;
+                     font-size: 12px;
+                     font-weight: 300;
+                     letter-spacing: 0.3px;
+                     line-height: 14px;
+                 }
+             }
+             .buttons {
+                 display: flex;
+                 justify-content: space-around;
+
+             }
+
+             button,
+             a {
+                 text-decoration: none !important;
+                 display: block;
+                 color: @pink-color;
+                 font-size: 16px;
+                 font-weight: bold;
+                 border-radius: 3px;
+                 border: 1px solid @pink-color;
+                 padding: 5px 25px;
+                 margin-right: 10px;
+                 line-height: 20px;
+                 font-style: normal;
+                 cursor: pointer;
+
+                 &:hover {
+                     background-color: @pink-color;
+                     color: #fff;
+                 }
+
+
+             }
+         }
+
+
 
     .collection {
         color: #f16d7f;
@@ -126,7 +138,6 @@
         line-height: 24px;
         text-transform: uppercase;
     }
-
 }
 
 

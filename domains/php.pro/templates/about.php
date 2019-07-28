@@ -3,7 +3,7 @@
         border-bottom: none;
     }
 
-    nav ul li:nth-child(3) a {
+    nav ul li:nth-child(4) a {
         border-bottom: 3px solid #ef5b70;
     }
 

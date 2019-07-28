@@ -33,6 +33,16 @@
     width: 100%;
   }
 }
+
+.infoOrder {
+  display: flex;
+  justify-content: space-between;
+}
+
+.infoOrder div {
+  margin-right: 15px;
+}
+
 .comments {
   padding: 50px 50px 50px;
   display: flex;

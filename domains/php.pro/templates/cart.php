@@ -54,7 +54,7 @@
                 </a>
             </div>
         </div>
-        <form action="/cart/sendOrder" method='post' class="inputBlock">
+        <form action="/orders/sendOrder" method='post' class="inputBlock">
             <div class="shippingAdress"><span>Shipping Adress</span>
                 <div class="column">
                     <input type="text" id="country" list="countrys" name="country" placeholder="Bangladesh">
